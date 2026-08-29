@@ -38,7 +38,8 @@ const LIBROS = [
     "escogidaPor": "Ana Villa",
     "serie": false,
     "saga": "Roller Coaster",
-    "sagaNumero": 2
+    "sagaNumero": 2,
+    "nueva": false
   },
   {
     "titulo": "Ava in March",
@@ -51,7 +52,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "Roller Coaster",
-    "sagaNumero": 4
+    "sagaNumero": 4,
+    "nueva": false
   },
   {
     "titulo": "Merry-Go-Round",
@@ -64,7 +66,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "Roller Coaster",
-    "sagaNumero": 6
+    "sagaNumero": 6,
+    "nueva": false
   },
   {
     "titulo": "Be my Boo!",
@@ -77,7 +80,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "BE MINE",
-    "sagaNumero": 4
+    "sagaNumero": 4,
+    "nueva": false
   },
   {
     "titulo": "Because of Love vol 1",
@@ -90,7 +94,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "TSOU",
-    "sagaNumero": 3
+    "sagaNumero": 3,
+    "nueva": false
   },
   {
     "titulo": "Because of Love vol 2",
@@ -103,7 +108,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "TSOU",
-    "sagaNumero": 4
+    "sagaNumero": 4,
+    "nueva": false
   },
   {
     "titulo": "YOU",
@@ -116,7 +122,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "TSOU",
-    "sagaNumero": 6
+    "sagaNumero": 6,
+    "nueva": false
   },
   {
     "titulo": "Reverse 4 You",
@@ -129,7 +136,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "REVERSE 4 YOU",
-    "sagaNumero": 1
+    "sagaNumero": 1,
+    "nueva": false
   },
   {
     "titulo": "Bad Sugar",
@@ -142,7 +150,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "REVERSE 4 YOU",
-    "sagaNumero": 2
+    "sagaNumero": 2,
+    "nueva": false
   },
   {
     "titulo": "MISTRESS G",
@@ -155,7 +164,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "The Wathinwanits",
@@ -168,7 +178,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "4 Elements",
-    "sagaNumero": 5
+    "sagaNumero": 5,
+    "nueva": false
   },
   {
     "titulo": "Mutelu U & Me",
@@ -181,7 +192,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "My Wife",
@@ -194,7 +206,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Sugar Mommy",
@@ -207,7 +220,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "VILLAIN STAR",
@@ -220,7 +234,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "180 Days Love Mission",
@@ -233,7 +248,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Once Again",
@@ -246,7 +262,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Chorfah Darin",
@@ -259,7 +276,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Remain Vol.02",
@@ -272,7 +290,8 @@ const LIBROS = [
     "escogidaPor": "Haruka Velasco",
     "serie": true,
     "saga": "Remain",
-    "sagaNumero": 2
+    "sagaNumero": 2,
+    "nueva": false
   },
   {
     "titulo": "Uncertainty",
@@ -285,7 +304,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Hidden Heart (Concealed Love)",
@@ -298,7 +318,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Obsessed",
@@ -311,7 +332,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "Perfume",
-    "sagaNumero": 3
+    "sagaNumero": 3,
+    "nueva": false
   },
   {
     "titulo": "No5",
@@ -324,7 +346,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "Perfume",
-    "sagaNumero": 1
+    "sagaNumero": 1,
+    "nueva": false
   },
   {
     "titulo": "Sister: Baby, I Love You",
@@ -337,7 +360,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "DNA",
@@ -350,7 +374,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Charming Lady",
@@ -363,7 +388,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Ashes of our hearts",
@@ -376,7 +402,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Bloody Mary",
@@ -389,7 +416,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "CHAIN",
@@ -402,7 +430,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Sweet as a Breeze, Deadly as Love",
@@ -415,7 +444,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "FORMIDABLE EYES (Khom Khlang)",
@@ -428,7 +458,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "UNTROVERT",
@@ -441,7 +472,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Beloved Passion",
@@ -450,11 +482,12 @@ const LIBROS = [
     "paginas": 507,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/444870/Thumbnail/book_detail_large.gif?8",
     "sinopsis": "Soy BB, Paphawarin.\n\nSuperar cada día siendo yo misma no es nada fácil. Mientras me abro camino en la caótica vida de una actriz, debo cuidar constantemente mi imagen, medir mis palabras y asegurarme de que cada postura y cada gesto parezcan elegantes e impecables con cada respiración que tomo. Pero entonces, de la nada, me encontré desafiando a cierta persona.\n\nSe llama Love, Lillada, mi compañera de clase increíblemente fría que prefiere mantenerse al margen. En realidad, es la hija de un multimillonario inmensamente poderoso. Como mi torpe mano se movió más rápido que mi cerebro, firmé sin querer el contrato que me ofreció antes incluso de leer los detalles con atención. En consecuencia, pasé a ser suya de forma implícita, atada por el acuerdo «Pasión Amada», lo que me convirtió en alguien comprometida sin posibilidad de escapar.\n\nA pesar de mi aversión a que me obliguen a nada, resulta que soy yo quien ansía ser de ella. ¿Qué es este anhelo y deseo infinitos por ella? Me he enamorado perdidamente de ella. No puedo vivir sin ella, como si ella fuera precisamente eso, lo que se llama una pasión desenfrenada.",
-    "escogida": true,
+    "escogida": false,
     "escogidaPor": "admin",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "THE HIDDEN BLOOD",
@@ -467,7 +500,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Adore Khun Jae Like Crazy!",
@@ -480,7 +514,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "BACK TO YOU",
@@ -493,7 +528,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Like Wife Khun Sam",
@@ -506,7 +542,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Queen Without a Name: Flame Garland",
@@ -519,7 +556,8 @@ const LIBROS = [
     "escogidaPor": "",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "By Your Side",
@@ -542,11 +580,12 @@ const LIBROS = [
     "paginas": 486,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/163914/Thumbnail/book_detail_large.gif?14",
     "sinopsis": "«¿Qué parte de la ropa interior de la clienta se ha dañado, por favor?»\n(Son los calzoncillos.)\n¿En serio? ¿De verdad hay gente en este mundo que plancha los calzoncillos?\nAiron se quedó atónita ante la extraña queja de la joven clienta y tenía que ver su cara para saber qué aspecto tenía.",
-    "escogida": true,
-    "escogidaPor": "admin",
+    "escogida": false,
+    "escogidaPor": "xxmadwavs",
     "serie": false,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Somewhere Somehow vol. 1",
@@ -559,7 +598,8 @@ const LIBROS = [
     "escogidaPor": "Capricornia",
     "serie": true,
     "saga": "Somewhere Somehow",
-    "sagaNumero": 1
+    "sagaNumero": 1,
+    "nueva": false
   },
   {
     "titulo": "Somewhere Somehow Vol.2",
@@ -572,6 +612,7 @@ const LIBROS = [
     "escogidaPor": "Capricornia",
     "serie": true,
     "saga": "Somewhere Somehow",
-    "sagaNumero": 2
+    "sagaNumero": 2,
+    "nueva": false
   }
 ];
