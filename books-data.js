@@ -4,7 +4,7 @@
 
    Campos:
      titulo, autora, anio, paginas, portada, sinopsis,
-     cogida (true/false), cogidaPor (opcional),
+     escogida (true/false), escogidaPor (opcional),
      serie (true/false), saga (opcional), sagaNumero (opcional)
    ============================================================ */
 
@@ -16,8 +16,8 @@ const LIBROS = [
     "paginas": 474,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/401749/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Ayudar a una chica de instituto que resultó herida en un pequeño accidente en la acera a principios de diciembre también marca el comienzo de un nuevo capítulo en la vida de Air. La chica dice con toda seriedad que su madre le enseñó que, cuando alguien te trata con amabilidad, debes corresponderle.\n\n«¿Podrías dejar que mi madre te invite a comer como agradecimiento?»\n\nSi Air no hubiera aceptado la invitación, ahora mismo no habría podido encontrar un nuevo hogar, y su celebración de fin de año habría sido igual que en los últimos años.\n\nHan pasado tres años desde que la persona que la amaba estuvo a su lado. Han sido tres años en los que el mes de diciembre ha inundado su corazón de soledad. En medio de la alegre celebración, la sensación de aislamiento que experimentaba como consecuencia de la soledad la hizo derramar lágrimas. Sin embargo, este diciembre, la vida de la mujer que aún no consigue superar la ruptura con su exnovio está experimentando cambios significativos. Y el cambio más notable es...\n\n… esta Navidad, no tiene que celebrarla sola, pensando en Pure, como ha venido haciendo hasta ahora.\n\n«Sería un placer que te unieras a nosotros para celebrar la Navidad, si aún no tienes otros planes».\n\nEste año, Air tendrá a alguien con quien celebrar la Navidad.",
-    "cogida": true,
-    "cogidaPor": "Ana Villa",
+    "escogida": true,
+    "escogidaPor": "Ana Villa",
     "serie": false,
     "saga": "Roller Coaster",
     "sagaNumero": 2
@@ -107,8 +107,8 @@ const LIBROS = [
     "paginas": 1166,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/268542/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Revertí el tiempo diez minutos, todo para sumergirme en el amor más profundo.\n\nEn un mundo donde el tiempo se dobla a voluntad de una chica común y corriente 'Jattawa' posee la extraordinaria habilidad de manipular el tiempo. ¿Su ambición? Convertirse en abogada y ejercer sus poderes por dinero. Pero el destino da un giro inesperado cuando se cruza con 'Four', una misteriosa estudiante de último año que está destinada a ser su alma gemela, según las predicciones de las visiones de su hermana.\nA medida que sus destinos se entrelazan, Jattawa se ve acosada por una sensación recurrente de déjà vu, un sentimiento de que ella y Four se han conocido a lo largo de incontables vidas. Sin embargo, su conexión desafía los límites del tiempo, lo que plantea preguntas sobre la naturaleza de su vínculo.\n\n¿Qué secretos se esconden detrás de su conexión atemporal? ¿Pueden los poderes únicos de Jattawa alterar el curso del destino? Con el poder de reescribir el pasado y salvar a quienes ama, Jattawa se embarcará en una carrera contra el tiempo y el destino mismo. ¡Sumérgete en esta cautivadora historia y descubre el enigma de un amor que trasciende incluso el tiempo!",
-    "cogida": true,
-    "cogidaPor": "",
+    "escogida": true,
+    "escogidaPor": "",
     "serie": true,
     "saga": "REVERSE 4 YOU",
     "sagaNumero": 1
@@ -250,8 +250,8 @@ const LIBROS = [
     "paginas": 272,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/368539/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Sé que esto nunca durará, pero mi corazón es traicionero. Aunque la realidad siempre me recuerda cuál es mi situación, estoy demasiado metida en esto, mi corazón no podría dejarte marchar...",
-    "cogida": true,
-    "cogidaPor": "Haruka Velasco",
+    "escogida": true,
+    "escogidaPor": "Haruka Velasco",
     "serie": true,
     "saga": "Remain",
     "sagaNumero": 2
@@ -367,8 +367,8 @@ const LIBROS = [
     "paginas": 241,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/264443/Thumbnail/book_detail_large.gif?8",
     "sinopsis": "«Se balancea, se balancea, las nubes se inundan;\nla liebre asoma la cabeza;\nel cadáver se retuerce, abrazándose el cuello y balanceándose».\n\n\n\nTan Yong fue diagnosticada con esquizofrenia desde los siete años;\nla anomalía cerebral le provoca alucinaciones;\n\nCada día tiene que soportar el tormento de ver...\nlo que los demás no ven\n\n\nEn plena noche de un día sagrado, tras apagarse las velas del mes de Prasa,\napareció una piel pálida como granos de arena blanca;\ncon el pelo largo color ámbar, una joven misteriosa se quedaba allí de pie, llorando...\nSangre roja y espesa inundaba su cuerpo, desde la coronilla hasta la punta de los pies;\n\n\nOh...\nLa leyenda de la joven del espejo\n\n\n¿Cómo ha llegado hasta aquí?\n\n\n\n«Bloody Mary»",
-    "cogida": true,
-    "cogidaPor": "",
+    "escogida": true,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -393,8 +393,8 @@ const LIBROS = [
     "paginas": 193,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/448459/Thumbnail/book_detail_large.gif?5",
     "sinopsis": "Todo comienza con una protesta por los precios de la caña de azúcar.\n\nDespués de que su hermana mayor, Hi-So Si, anteponga el amor a las expectativas y se case con una mujer, todas las esperanzas de continuar el linaje familiar recaen sobre Hi-So Song, la heredera que debe asumir tanto el legado como la responsabilidad.\n\nPor otro lado está Dao Nuea, que lidera la protesta contra la fábrica de la señorita Song, convencida de que lucha por lo que es justo. Pero cuando se adentra en el mundo al que antes se oponía, la certeza empieza a desvanecerse, al igual que la distancia entre ellas.\n\nLo que comienza como un conflicto se convierte poco a poco en algo de lo que ninguna de las dos puede alejarse, aunque todas las expectativas les digan que deberían hacerlo.",
-    "cogida": true,
-    "cogidaPor": "",
+    "escogida": true,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -432,8 +432,8 @@ const LIBROS = [
     "paginas": 507,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/444870/Thumbnail/book_detail_large.gif?8",
     "sinopsis": "Soy BB, Paphawarin.\n\nSuperar cada día siendo yo misma no es nada fácil. Mientras me abro camino en la caótica vida de una actriz, debo cuidar constantemente mi imagen, medir mis palabras y asegurarme de que cada postura y cada gesto parezcan elegantes e impecables con cada respiración que tomo. Pero entonces, de la nada, me encontré desafiando a cierta persona.\n\nSe llama Love, Lillada, mi compañera de clase increíblemente fría que prefiere mantenerse al margen. En realidad, es la hija de un multimillonario inmensamente poderoso. Como mi torpe mano se movió más rápido que mi cerebro, firmé sin querer el contrato que me ofreció antes incluso de leer los detalles con atención. En consecuencia, pasé a ser suya de forma implícita, atada por el acuerdo «Pasión Amada», lo que me convirtió en alguien comprometida sin posibilidad de escapar.\n\nA pesar de mi aversión a que me obliguen a nada, resulta que soy yo quien ansía ser de ella. ¿Qué es este anhelo y deseo infinitos por ella? Me he enamorado perdidamente de ella. No puedo vivir sin ella, como si ella fuera precisamente eso, lo que se llama una pasión desenfrenada.",
-    "cogida": true,
-    "cogidaPor": "Admin",
+    "escogida": true,
+    "escogidaPor": "admin",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -523,10 +523,36 @@ const LIBROS = [
     "paginas": 486,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/163914/Thumbnail/book_detail_large.gif?14",
     "sinopsis": "«¿Qué parte de la ropa interior de la clienta se ha dañado, por favor?»\n(Son los calzoncillos.)\n¿En serio? ¿De verdad hay gente en este mundo que plancha los calzoncillos?\nAiron se quedó atónita ante la extraña queja de la joven clienta y tenía que ver su cara para saber qué aspecto tenía.",
-    "cogida": true,
-    "cogidaPor": "admin",
+    "escogida": true,
+    "escogidaPor": "admin",
     "serie": false,
     "saga": "",
     "sagaNumero": null
+  },
+  {
+    "titulo": "Somewhere Somehow vol. 1",
+    "autora": "MonMaw",
+    "anio": 2025,
+    "paginas": 515,
+    "portada": "https://cdn-local.mebmarket.com/meb/server1/343980/Thumbnail/book_detail_large.gif?8",
+    "sinopsis": "Una novela de comedia romántica sobre un ingeniero inteligente y una guapa vicepresidenta.\nEsta historia te hará sonreír, reír y llorar.",
+    "escogida": true,
+    "escogidaPor": "Capricornia",
+    "serie": true,
+    "saga": "Somewhere Somehow",
+    "sagaNumero": 1
+  },
+  {
+    "titulo": "Somewhere Somehow Vol.2",
+    "autora": "MonMaw",
+    "anio": 2025,
+    "paginas": 550,
+    "portada": "https://cdn-local.mebmarket.com/meb/server1/361134/Thumbnail/book_detail_large.gif?4",
+    "sinopsis": "Una novela de comedia romántica sobre un ingeniero inteligente y una guapa vicepresidenta.\nEsta historia te hará sonreír, reír y llorar.",
+    "escogida": true,
+    "escogidaPor": "Capricornia",
+    "serie": true,
+    "saga": "Somewhere Somehow",
+    "sagaNumero": 2
   }
 ];
