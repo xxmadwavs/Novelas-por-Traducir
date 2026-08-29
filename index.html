@@ -271,8 +271,6 @@ h1{
   transform:rotate(-11deg);
 }
 .etiqueta-serie{
-  position:absolute;
-  top:16px;left:14px;
   font-family:var(--font-stamp);
   font-size:9.5px;
   letter-spacing:0.1em;
@@ -282,6 +280,27 @@ h1{
   border-radius:2px;
   padding:3px 6px;
   opacity:0.85;
+  background:rgba(236,225,200,0.6);
+}
+.etiqueta-nueva{
+  font-family:var(--font-stamp);
+  font-size:9.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--kraft);
+  background:var(--sello-rojo);
+  border:1px solid var(--sello-rojo);
+  border-radius:2px;
+  padding:3px 6px;
+  opacity:0.92;
+}
+.etiquetas-top{
+  position:absolute;
+  top:16px;left:14px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
 }
 .saga-libro{
   text-align:center;
@@ -484,7 +503,11 @@ function render(){
     <article class="ficha" tabindex="0" data-idx="${LIBROS.indexOf(libro)}">
       <div class="perforacion"></div>
       <div class="sello ${libro.escogida?'escogida':'libre'}">${libro.escogida?'Escogida':'Libre'}</div>
-      ${libro.serie ? '<div class="etiqueta-serie">Tiene serie</div>' : ''}
+      ${(libro.nueva || libro.serie) ? `
+      <div class="etiquetas-top">
+        ${libro.nueva ? '<span class="etiqueta-nueva">Nueva</span>' : ''}
+        ${libro.serie ? '<span class="etiqueta-serie">Tiene serie</span>' : ''}
+      </div>` : ''}
       <div class="portada-wrap">
         <div class="cinta"></div>
         <img src="${libro.portada}" alt="Portada de ${escapeHtml(libro.titulo)}" loading="lazy">
@@ -514,7 +537,7 @@ function abrirModal(libro){
       <div>
         <div class="modal-titulo">${escapeHtml(libro.titulo)}</div>
         <div class="modal-autora">${escapeHtml(libro.autora)}</div>
-        <div class="modal-meta"><span>${libro.anio}</span><span>${libro.paginas} páginas</span>${libro.serie ? '<span>Tiene serie</span>' : ''}</div>
+        <div class="modal-meta"><span>${libro.anio}</span><span>${libro.paginas} páginas</span>${libro.serie ? '<span>Tiene serie</span>' : ''}${libro.nueva ? '<span>Nueva</span>' : ''}</div>
         ${libro.saga ? `<div class="modal-meta" style="margin-top:-6px"><span>Saga: ${escapeHtml(libro.saga)}${libro.sagaNumero ? ' #' + libro.sagaNumero : ''}</span></div>` : ''}
         <span class="modal-estado ${libro.escogida?'escogida':'libre'}">
           ${libro.escogida ? ('Escogida' + (libro.escogidaPor ? ' por ' + escapeHtml(libro.escogidaPor) : '')) : 'Libre para traducir'}

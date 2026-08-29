@@ -264,6 +264,7 @@ textarea#salida{
 
   <section class="panel">
     <h2 id="titulo-form">2 · Añadir novela</h2>
+    <p class="panel-desc">Las novelas nuevas se añaden arriba del todo de la lista, así que saldrán las primeras en el catálogo. Marca «novela nueva» si quieres que se vea la etiqueta «Nueva» en la ficha; luego, cuando quieras quitarla, usa el botón correspondiente en el paso 3.</p>
     <div class="campo">
       <label for="f-titulo">Título</label>
       <input type="text" id="f-titulo">
@@ -301,6 +302,9 @@ textarea#salida{
     </div>
     <div class="campo">
       <label class="check"><input type="checkbox" id="f-serie"> Tiene serie / adaptación</label>
+    </div>
+    <div class="campo">
+      <label class="check"><input type="checkbox" id="f-nueva"> Marcar como novela nueva (etiqueta «Nueva» en la ficha)</label>
     </div>
     <div class="fila">
       <div class="campo">
@@ -404,11 +408,13 @@ function renderLista(){
         <div class="fila-titulo">${escapeHtml(n.titulo || '(sin título)')}</div>
         <div class="fila-meta">${escapeHtml(n.autora||'')} · ${n.anio||'—'} · ${n.paginas||'—'} pág.</div>
         <span class="fila-estado ${n.escogida?'escogida':'libre'}">${n.escogida ? ('Escogida' + (n.escogidaPor?(' · '+escapeHtml(n.escogidaPor)):'')) : 'Libre'}</span>
+        ${n.nueva ? '<span class="fila-estado escogida" style="margin-left:6px;color:var(--kraft);background:var(--sello-rojo);border:1px solid var(--sello-rojo)">Nueva</span>' : ''}
         ${n.serie ? '<span class="fila-estado libre" style="margin-left:6px;color:var(--latón-claro);background:transparent;border:1px solid var(--latón)">Serie</span>' : ''}
         ${n.saga ? `<div class="fila-meta" style="margin-top:4px;font-style:italic">${escapeHtml(n.saga)}${n.sagaNumero?' · #'+n.sagaNumero:''}</div>` : ''}
       </div>
       <div class="fila-botones">
         <button class="btn secundario pequeño" onclick="alternarEscogida(${i})">${n.escogida?'Marcar libre':'Marcar escogida'}</button>
+        <button class="btn secundario pequeño" onclick="alternarNueva(${i})">${n.nueva?'Quitar «Nueva»':'Marcar «Nueva»'}</button>
         <button class="btn secundario pequeño" onclick="editarNovela(${i})">Editar</button>
         <button class="btn peligro pequeño" onclick="borrarNovela(${i})">Borrar</button>
       </div>
@@ -418,6 +424,12 @@ function renderLista(){
 
 function alternarEscogida(i){
   novelas[i].escogida = !novelas[i].escogida;
+  guardarLocal();
+  renderLista();
+}
+
+function alternarNueva(i){
+  novelas[i].nueva = !novelas[i].nueva;
   guardarLocal();
   renderLista();
 }
@@ -434,6 +446,7 @@ function editarNovela(i){
   campoEscogidaPor.style.display = n.escogida ? 'block' : 'none';
   document.getElementById('f-escogidapor').value = n.escogidaPor || '';
   document.getElementById('f-serie').checked = !!n.serie;
+  document.getElementById('f-nueva').checked = !!n.nueva;
   document.getElementById('f-saga').value = n.saga || '';
   document.getElementById('f-saganumero').value = n.sagaNumero || '';
   editandoIndex = i;
@@ -461,6 +474,7 @@ function limpiarFormulario(){
   campoEscogidaPor.style.display = 'none';
   document.getElementById('f-escogidapor').value = '';
   document.getElementById('f-serie').checked = false;
+  document.getElementById('f-nueva').checked = false;
   document.getElementById('f-saga').value = '';
   document.getElementById('f-saganumero').value = '';
   editandoIndex = null;
@@ -477,7 +491,7 @@ document.getElementById('btn-guardar').addEventListener('click', ()=>{
     alert('Ponle un título a la novela antes de guardarla.');
     return;
   }
-  const nueva = {
+  const datosNovela = {
     titulo,
     autora: document.getElementById('f-autora').value.trim(),
     anio: Number(document.getElementById('f-anio').value) || null,
@@ -488,12 +502,15 @@ document.getElementById('btn-guardar').addEventListener('click', ()=>{
     escogidaPor: document.getElementById('f-escogidapor').value.trim(),
     serie: document.getElementById('f-serie').checked,
     saga: document.getElementById('f-saga').value.trim(),
-    sagaNumero: Number(document.getElementById('f-saganumero').value) || null
+    sagaNumero: Number(document.getElementById('f-saganumero').value) || null,
+    nueva: document.getElementById('f-nueva').checked
   };
   if(editandoIndex !== null){
-    novelas[editandoIndex] = nueva;
+    novelas[editandoIndex] = datosNovela;
   } else {
-    novelas.push(nueva);
+    // Las novelas se añaden al principio de la lista para que salgan
+    // arriba del todo en el catálogo.
+    novelas.unshift(datosNovela);
   }
   guardarLocal();
   renderLista();
@@ -529,7 +546,8 @@ async function importarArchivo(input){
       escogidaPor: n.escogidaPor || '',
       serie: !!n.serie,
       saga: n.saga || '',
-      sagaNumero: n.sagaNumero || null
+      sagaNumero: n.sagaNumero || null,
+      nueva: !!n.nueva
     }));
     guardarLocal();
     renderLista();
@@ -549,7 +567,11 @@ function generarCodigo(){
    Campos:
      titulo, autora, anio, paginas, portada, sinopsis,
      escogida (true/false), escogidaPor (opcional),
-     serie (true/false), saga (opcional), sagaNumero (opcional)
+     serie (true/false), saga (opcional), sagaNumero (opcional),
+     nueva (true/false)
+
+   El orden de este array es el orden en que se muestran las novelas
+   en la web: las más nuevas van arriba del todo.
    ============================================================ */
 
 const LIBROS = `;
