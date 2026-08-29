@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escritorio · Novelas por Traducir</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#1c2e26;
+  --verde2:#243b30;
+  --verde3:#2c473a;
+  --kraft:#ece1c8;
+  --kraft2:#e0d2ac;
+  --tinta:#2b2620;
+  --tinta-suave:#6b5f4f;
+  --latón:#a9843f;
+  --latón-claro:#c9a765;
+  --sello-rojo:#a3392c;
+  --sello-azul:#2e5359;
+  --radius:3px;
+  --font-display:'Fraunces',Georgia,serif;
+  --font-stamp:'Special Elite',monospace;
+  --font-body:'Courier Prime',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--verde);
+  background-image:radial-gradient(ellipse at 20% -10%, rgba(169,132,63,0.08) 0%, transparent 45%);
+  color:var(--kraft);
+  font-family:var(--font-body);
+  min-height:100vh;
+  padding-bottom:80px;
+}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--latón-claro);
+  outline-offset:2px;
+}
+
+header{
+  padding:44px 24px 30px;
+  text-align:center;
+  border-bottom:1px solid rgba(169,132,63,0.25);
+}
+.eyebrow{
+  font-family:var(--font-stamp);
+  font-size:11px;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--latón-claro);
+  margin-bottom:8px;
+}
+h1{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:500;
+  font-size:clamp(24px,4vw,34px);
+}
+.volver{
+  display:inline-block;
+  margin-top:14px;
+  font-family:var(--font-stamp);
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--kraft2);
+  text-decoration:none;
+  border-bottom:1px solid rgba(224,210,172,0.4);
+}
+
+main{
+  max-width:760px;
+  margin:0 auto;
+  padding:36px 24px 0;
+  display:flex;
+  flex-direction:column;
+  gap:36px;
+}
+
+.panel{
+  background:var(--verde2);
+  border:1px solid rgba(169,132,63,0.25);
+  border-radius:var(--radius);
+  padding:26px 24px;
+}
+.panel h2{
+  font-family:var(--font-stamp);
+  font-size:13px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--latón-claro);
+  margin-bottom:16px;
+}
+.panel-desc{
+  font-size:12px;
+  color:var(--kraft2);
+  opacity:0.75;
+  margin-bottom:16px;
+  line-height:1.6;
+}
+
+/* formulario */
+.campo{margin-bottom:16px}
+.campo label{
+  display:block;
+  font-family:var(--font-stamp);
+  font-size:10.5px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--kraft2);
+  margin-bottom:6px;
+}
+.campo input[type=text],
+.campo input[type=number],
+.campo input[type=url],
+.campo textarea{
+  width:100%;
+  background:var(--verde);
+  border:1px solid rgba(169,132,63,0.35);
+  color:var(--kraft);
+  font-family:var(--font-body);
+  font-size:13px;
+  padding:10px 12px;
+  border-radius:2px;
+}
+.campo textarea{min-height:90px;resize:vertical;line-height:1.6}
+.fila{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.check{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--font-stamp);
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--kraft2);
+}
+.check input{width:16px;height:16px}
+
+.btn{
+  font-family:var(--font-stamp);
+  font-size:11.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:11px 20px;
+  border-radius:2px;
+  border:1px solid var(--latón);
+  background:var(--latón);
+  color:var(--verde);
+  cursor:pointer;
+  transition:opacity .15s ease;
+}
+.btn:hover{opacity:0.88}
+.btn.secundario{
+  background:transparent;
+  color:var(--latón-claro);
+}
+.btn.peligro{
+  background:transparent;
+  border-color:var(--sello-rojo);
+  color:var(--sello-rojo);
+}
+.btn.pequeño{padding:6px 12px;font-size:10px}
+.acciones-form{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
+#importArchivo{display:none}
+
+/* lista de novelas cargadas */
+.lista{display:flex;flex-direction:column;gap:12px}
+.fila-novela{
+  background:var(--kraft);
+  color:var(--tinta);
+  border-radius:2px;
+  padding:14px 16px;
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+}
+.fila-novela img{
+  width:44px;height:64px;
+  object-fit:cover;
+  flex-shrink:0;
+  background:var(--verde2);
+}
+.fila-info{flex:1;min-width:0}
+.fila-titulo{font-family:var(--font-display);font-weight:600;font-size:16px}
+.fila-meta{font-size:11px;color:var(--tinta-suave);margin-top:2px}
+.fila-estado{
+  display:inline-block;
+  margin-top:6px;
+  font-family:var(--font-stamp);
+  font-size:10px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:2px;
+}
+.fila-estado.libre{background:rgba(46,83,89,0.14);color:var(--sello-azul)}
+.fila-estado.cogida{background:rgba(163,57,44,0.14);color:var(--sello-rojo)}
+.fila-botones{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
+.vacio-lista{
+  font-family:var(--font-stamp);
+  font-size:12px;
+  color:var(--kraft2);
+  opacity:0.6;
+  text-align:center;
+  padding:20px;
+}
+
+textarea#salida{
+  width:100%;
+  min-height:220px;
+  background:var(--verde);
+  color:var(--kraft2);
+  border:1px solid rgba(169,132,63,0.35);
+  border-radius:2px;
+  font-family:var(--font-body);
+  font-size:11.5px;
+  line-height:1.6;
+  padding:14px;
+  white-space:pre;
+}
+.aviso-copiado{
+  font-family:var(--font-stamp);
+  font-size:11px;
+  color:var(--latón-claro);
+  margin-top:8px;
+  height:14px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Herramienta local · no sube nada a internet</div>
+  <h1>Escritorio de novelas</h1>
+  <a class="volver" href="index.html">← Volver al catálogo</a>
+</header>
+
+<main>
+
+  <section class="panel">
+    <h2>1 · Importar / exportar</h2>
+    <p class="panel-desc">Importa tu <code>books-data.js</code> (o un .json) para seguir editando la lista, o exporta la lista actual en un clic. Si vas a empezar de cero, sáltate el importar.</p>
+    <div class="acciones-form">
+      <label class="btn secundario" for="importArchivo" style="cursor:pointer">⬆ Importar archivo</label>
+      <input type="file" id="importArchivo" accept=".js,.json,.txt" onchange="importarArchivo(this)">
+      <button class="btn" id="btn-exportar">⬇ Exportar books-data.js</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2 id="titulo-form">2 · Añadir novela</h2>
+    <div class="campo">
+      <label for="f-titulo">Título</label>
+      <input type="text" id="f-titulo">
+    </div>
+    <div class="fila">
+      <div class="campo">
+        <label for="f-autora">Autora</label>
+        <input type="text" id="f-autora">
+      </div>
+      <div class="campo">
+        <label for="f-anio">Año</label>
+        <input type="number" id="f-anio">
+      </div>
+    </div>
+    <div class="fila">
+      <div class="campo">
+        <label for="f-paginas">Páginas</label>
+        <input type="number" id="f-paginas">
+      </div>
+      <div class="campo">
+        <label for="f-portada">URL de la portada</label>
+        <input type="url" id="f-portada" placeholder="https://…">
+      </div>
+    </div>
+    <div class="campo">
+      <label for="f-sinopsis">Sinopsis</label>
+      <textarea id="f-sinopsis"></textarea>
+    </div>
+    <div class="campo">
+      <label class="check"><input type="checkbox" id="f-cogida"> Ya la ha cogido alguien para traducir</label>
+    </div>
+    <div class="campo" id="campo-cogidapor" style="display:none">
+      <label for="f-cogidapor">¿Quién la ha cogido? (opcional)</label>
+      <input type="text" id="f-cogidapor">
+    </div>
+    <div class="campo">
+      <label class="check"><input type="checkbox" id="f-serie"> Tiene serie / adaptación</label>
+    </div>
+    <div class="fila">
+      <div class="campo">
+        <label for="f-saga">Saga (opcional)</label>
+        <input type="text" id="f-saga" placeholder="Nombre de la saga">
+      </div>
+      <div class="campo">
+        <label for="f-saganumero">Número en la saga (opcional)</label>
+        <input type="number" id="f-saganumero">
+      </div>
+    </div>
+    <div class="acciones-form">
+      <button class="btn" id="btn-guardar">Añadir novela</button>
+      <button class="btn secundario" id="btn-cancelar" style="display:none">Cancelar edición</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>3 · Novelas en la lista (<span id="conteo">0</span>)</h2>
+    <div class="lista" id="lista"></div>
+  </section>
+
+  <section class="panel">
+    <h2>4 · Generar books-data.js</h2>
+    <p class="panel-desc">Cuando la lista esté como quieres, descarga el archivo o cópialo y pégalo sustituyendo tu <code>books-data.js</code>, luego sube el cambio a GitHub.</p>
+    <div class="acciones-form">
+      <button class="btn" id="btn-generar">Generar código</button>
+      <button class="btn secundario" id="btn-descargar">Descargar books-data.js</button>
+      <button class="btn secundario" id="btn-copiar">Copiar código</button>
+    </div>
+    <p class="aviso-copiado" id="aviso"></p>
+    <textarea id="salida" readonly placeholder="Pulsa «Generar código» para ver aquí el contenido de books-data.js"></textarea>
+  </section>
+
+</main>
+
+<script>
+const CLAVE_LOCAL = 'novelas_admin_borrador';
+let novelas = JSON.parse(localStorage.getItem(CLAVE_LOCAL) || '[]');
+let editandoIndex = null;
+
+const lista = document.getElementById('lista');
+const conteo = document.getElementById('conteo');
+const salida = document.getElementById('salida');
+const aviso = document.getElementById('aviso');
+
+const campoCogida = document.getElementById('f-cogida');
+const campoCogidaPor = document.getElementById('campo-cogidapor');
+campoCogida.addEventListener('change', ()=>{
+  campoCogidaPor.style.display = campoCogida.checked ? 'block' : 'none';
+});
+
+function guardarLocal(){
+  localStorage.setItem(CLAVE_LOCAL, JSON.stringify(novelas));
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str ?? '';
+  return div.innerHTML;
+}
+
+function renderLista(){
+  conteo.textContent = novelas.length;
+  if(novelas.length === 0){
+    lista.innerHTML = '<div class="vacio-lista">Todavía no hay ninguna novela en la lista.</div>';
+    return;
+  }
+  lista.innerHTML = novelas.map((n, i)=>`
+    <div class="fila-novela">
+      <img src="${n.portada || ''}" alt="" onerror="this.style.visibility='hidden'">
+      <div class="fila-info">
+        <div class="fila-titulo">${escapeHtml(n.titulo || '(sin título)')}</div>
+        <div class="fila-meta">${escapeHtml(n.autora||'')} · ${n.anio||'—'} · ${n.paginas||'—'} pág.</div>
+        <span class="fila-estado ${n.cogida?'cogida':'libre'}">${n.cogida ? ('Cogida' + (n.cogidaPor?(' · '+escapeHtml(n.cogidaPor)):'')) : 'Libre'}</span>
+        ${n.serie ? '<span class="fila-estado libre" style="margin-left:6px;color:var(--latón-claro);background:transparent;border:1px solid var(--latón)">Serie</span>' : ''}
+        ${n.saga ? `<div class="fila-meta" style="margin-top:4px;font-style:italic">${escapeHtml(n.saga)}${n.sagaNumero?' · #'+n.sagaNumero:''}</div>` : ''}
+      </div>
+      <div class="fila-botones">
+        <button class="btn secundario pequeño" onclick="alternarCogida(${i})">${n.cogida?'Marcar libre':'Marcar cogida'}</button>
+        <button class="btn secundario pequeño" onclick="editarNovela(${i})">Editar</button>
+        <button class="btn peligro pequeño" onclick="borrarNovela(${i})">Borrar</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function alternarCogida(i){
+  novelas[i].cogida = !novelas[i].cogida;
+  guardarLocal();
+  renderLista();
+}
+
+function editarNovela(i){
+  const n = novelas[i];
+  document.getElementById('f-titulo').value = n.titulo || '';
+  document.getElementById('f-autora').value = n.autora || '';
+  document.getElementById('f-anio').value = n.anio || '';
+  document.getElementById('f-paginas').value = n.paginas || '';
+  document.getElementById('f-portada').value = n.portada || '';
+  document.getElementById('f-sinopsis').value = n.sinopsis || '';
+  campoCogida.checked = !!n.cogida;
+  campoCogidaPor.style.display = n.cogida ? 'block' : 'none';
+  document.getElementById('f-cogidapor').value = n.cogidaPor || '';
+  document.getElementById('f-serie').checked = !!n.serie;
+  document.getElementById('f-saga').value = n.saga || '';
+  document.getElementById('f-saganumero').value = n.sagaNumero || '';
+  editandoIndex = i;
+  document.getElementById('titulo-form').textContent = '2 · Editando novela';
+  document.getElementById('btn-guardar').textContent = 'Guardar cambios';
+  document.getElementById('btn-cancelar').style.display = 'inline-block';
+  document.querySelector('.panel:nth-of-type(2)').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function borrarNovela(i){
+  if(!confirm(`¿Borrar «${novelas[i].titulo}» de la lista?`)) return;
+  novelas.splice(i,1);
+  guardarLocal();
+  renderLista();
+}
+
+function limpiarFormulario(){
+  document.getElementById('f-titulo').value = '';
+  document.getElementById('f-autora').value = '';
+  document.getElementById('f-anio').value = '';
+  document.getElementById('f-paginas').value = '';
+  document.getElementById('f-portada').value = '';
+  document.getElementById('f-sinopsis').value = '';
+  campoCogida.checked = false;
+  campoCogidaPor.style.display = 'none';
+  document.getElementById('f-cogidapor').value = '';
+  document.getElementById('f-serie').checked = false;
+  document.getElementById('f-saga').value = '';
+  document.getElementById('f-saganumero').value = '';
+  editandoIndex = null;
+  document.getElementById('titulo-form').textContent = '2 · Añadir novela';
+  document.getElementById('btn-guardar').textContent = 'Añadir novela';
+  document.getElementById('btn-cancelar').style.display = 'none';
+}
+
+document.getElementById('btn-cancelar').addEventListener('click', limpiarFormulario);
+
+document.getElementById('btn-guardar').addEventListener('click', ()=>{
+  const titulo = document.getElementById('f-titulo').value.trim();
+  if(!titulo){
+    alert('Ponle un título a la novela antes de guardarla.');
+    return;
+  }
+  const nueva = {
+    titulo,
+    autora: document.getElementById('f-autora').value.trim(),
+    anio: Number(document.getElementById('f-anio').value) || null,
+    paginas: Number(document.getElementById('f-paginas').value) || null,
+    portada: document.getElementById('f-portada').value.trim(),
+    sinopsis: document.getElementById('f-sinopsis').value.trim(),
+    cogida: campoCogida.checked,
+    cogidaPor: document.getElementById('f-cogidapor').value.trim(),
+    serie: document.getElementById('f-serie').checked,
+    saga: document.getElementById('f-saga').value.trim(),
+    sagaNumero: Number(document.getElementById('f-saganumero').value) || null
+  };
+  if(editandoIndex !== null){
+    novelas[editandoIndex] = nueva;
+  } else {
+    novelas.push(nueva);
+  }
+  guardarLocal();
+  renderLista();
+  limpiarFormulario();
+});
+
+async function importarArchivo(input){
+  const file = input.files[0];
+  if(!file) return;
+  const texto = await file.text();
+
+  // Acepta tanto un books-data.js completo (con "const LIBROS = [...]")
+  // como un .json que sea directamente el array.
+  const inicio = texto.indexOf('[');
+  const fin = texto.lastIndexOf(']');
+  if(inicio === -1 || fin === -1){
+    alert('No he encontrado una lista [ ... ] en ese archivo. Comprueba que es un books-data.js o .json válido.');
+    input.value = '';
+    return;
+  }
+  try{
+    const arrayTexto = texto.slice(inicio, fin+1);
+    const importadas = new Function('return ' + arrayTexto)();
+    if(!Array.isArray(importadas)) throw new Error('no es una lista');
+    novelas = importadas.map(n=>({
+      titulo: n.titulo || '',
+      autora: n.autora || '',
+      anio: n.anio || null,
+      paginas: n.paginas || null,
+      portada: n.portada || '',
+      sinopsis: n.sinopsis || '',
+      cogida: !!n.cogida,
+      cogidaPor: n.cogidaPor || '',
+      serie: !!n.serie,
+      saga: n.saga || '',
+      sagaNumero: n.sagaNumero || null
+    }));
+    guardarLocal();
+    renderLista();
+    alert(`Importadas ${novelas.length} novelas ✓`);
+  }catch(err){
+    alert('No he podido leer ese archivo. Revisa que sea el contenido tal cual de books-data.js.');
+  }finally{
+    input.value = '';
+  }
+}
+
+function generarCodigo(){
+  const cabecera = `/* ============================================================
+   FICHERO DE NOVELAS — generado desde el escritorio (admin.html)
+   Puedes seguir editándolo a mano o volver a generarlo desde admin.html.
+
+   Campos:
+     titulo, autora, anio, paginas, portada, sinopsis,
+     cogida (true/false), cogidaPor (opcional),
+     serie (true/false), saga (opcional), sagaNumero (opcional)
+   ============================================================ */
+
+const LIBROS = `;
+  return cabecera + JSON.stringify(novelas, null, 2) + ';\n';
+}
+
+document.getElementById('btn-generar').addEventListener('click', ()=>{
+  salida.value = generarCodigo();
+});
+
+function descargarBooksData(){
+  const contenido = generarCodigo();
+  salida.value = contenido;
+  const blob = new Blob([contenido], {type:'text/javascript'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'books-data.js';
+  a.click();
+}
+
+document.getElementById('btn-descargar').addEventListener('click', descargarBooksData);
+document.getElementById('btn-exportar').addEventListener('click', descargarBooksData);
+
+document.getElementById('btn-copiar').addEventListener('click', async ()=>{
+  const contenido = salida.value || generarCodigo();
+  salida.value = contenido;
+  try{
+    await navigator.clipboard.writeText(contenido);
+    aviso.textContent = 'Copiado ✓';
+  }catch(e){
+    aviso.textContent = 'Selecciona el texto y cópialo manualmente.';
+  }
+  setTimeout(()=>{ aviso.textContent=''; }, 2500);
+});
+
+renderLista();
+</script>
+
+</body>
+</html>
