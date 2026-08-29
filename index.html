@@ -860,16 +860,16 @@ function renderModalAuth(pestaña){
   const contenido = document.getElementById('authContenido');
   if(pestaña === 'registro'){
     contenido.innerHTML = `
-      <div class="campo"><label>@ de Telegram</label><input id="regTelegram" placeholder="@tuusuario"></div>
-      <div class="campo"><label>Email</label><input id="regEmail" type="email"></div>
-      <div class="campo"><label>Contraseña</label><input id="regPass" type="password" placeholder="mínimo 6 caracteres"></div>
+      <div class="campo"><label>@ de Telegram</label><input id="regTelegram" name="regTelegram" autocomplete="off" placeholder="@tuusuario"></div>
+      <div class="campo"><label>Email</label><input id="regEmail" name="regEmail" type="email" autocomplete="new-email" placeholder="tu@email.com"></div>
+      <div class="campo"><label>Contraseña</label><input id="regPass" name="regPass" type="password" autocomplete="new-password" placeholder="mínimo 6 caracteres"></div>
       <button class="boton-principal" id="btnRegistrar">Crear cuenta</button>
     `;
     document.getElementById('btnRegistrar').addEventListener('click', registrar);
   } else {
     contenido.innerHTML = `
-      <div class="campo"><label>Email</label><input id="loginEmail" type="email"></div>
-      <div class="campo"><label>Contraseña</label><input id="loginPass" type="password"></div>
+      <div class="campo"><label>Email</label><input id="loginEmail" name="loginEmail" type="email" autocomplete="username" placeholder="tu@email.com"></div>
+      <div class="campo"><label>Contraseña</label><input id="loginPass" name="loginPass" type="password" autocomplete="current-password"></div>
       <button class="boton-principal" id="btnLogin">Entrar</button>
     `;
     document.getElementById('btnLogin').addEventListener('click', iniciarSesion);
