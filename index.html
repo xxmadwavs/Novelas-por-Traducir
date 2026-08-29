@@ -437,6 +437,142 @@ h1{
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important}
 }
+
+/* ---- sesión / auth ---- */
+.barra-sesion{
+  max-width:900px;
+  margin:20px auto 0;
+  padding:0 24px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  font-family:var(--font-stamp);
+  font-size:11px;
+  letter-spacing:0.06em;
+  color:var(--kraft2);
+}
+.barra-sesion button, .barra-sesion .quien{
+  background:transparent;
+  border:1px solid rgba(169,132,63,0.4);
+  color:var(--kraft2);
+  font-family:var(--font-stamp);
+  font-size:11px;
+  letter-spacing:0.06em;
+  padding:7px 14px;
+  border-radius:2px;
+  cursor:pointer;
+  text-transform:uppercase;
+}
+.barra-sesion button:hover{background:rgba(169,132,63,0.12)}
+.barra-sesion .quien{cursor:default;color:var(--latón-claro);border-color:var(--latón)}
+
+.modal-auth{max-width:380px}
+.auth-tabs{display:flex;gap:8px;margin-bottom:18px}
+.auth-tab{
+  flex:1;
+  font-family:var(--font-stamp);
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:9px;
+  text-align:center;
+  border:1px solid rgba(107,95,79,0.35);
+  background:transparent;
+  color:var(--tinta-suave);
+  cursor:pointer;
+  border-radius:2px;
+}
+.auth-tab.activo{background:var(--verde);color:var(--kraft);border-color:var(--verde)}
+.campo{margin-bottom:14px}
+.campo label{
+  display:block;
+  font-family:var(--font-stamp);
+  font-size:10.5px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+  margin-bottom:5px;
+}
+.campo input, .campo select{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid rgba(107,95,79,0.35);
+  border-radius:2px;
+  font-family:var(--font-body);
+  font-size:13px;
+  background:#fff;
+  color:var(--tinta);
+}
+.boton-principal{
+  width:100%;
+  padding:11px;
+  background:var(--verde);
+  color:var(--kraft);
+  border:none;
+  border-radius:2px;
+  font-family:var(--font-stamp);
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  margin-top:6px;
+}
+.boton-principal:hover{background:var(--verde2)}
+.auth-error{
+  font-size:12px;
+  color:var(--sello-rojo);
+  margin-top:10px;
+  min-height:1em;
+}
+.auth-ok{font-size:12px;color:var(--sello-azul);margin-top:10px}
+
+/* ---- panel "mi progreso" ---- */
+.panel-progreso{
+  max-width:640px;
+  margin:30px auto 0;
+  padding:0 24px;
+}
+.tarjeta-progreso{
+  background:var(--kraft);
+  color:var(--tinta);
+  border-radius:var(--radius);
+  padding:22px;
+  box-shadow:0 10px 22px rgba(0,0,0,0.28);
+}
+.tarjeta-progreso h2{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:18px;
+  margin-bottom:14px;
+}
+.fila-progreso{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.fila-progreso .campo{flex:1 1 140px;margin-bottom:0}
+.barra-porcentaje{
+  height:8px;
+  background:rgba(107,95,79,0.2);
+  border-radius:4px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.barra-porcentaje-relleno{
+  height:100%;
+  background:var(--latón);
+}
+
+.etiqueta-estado{
+  display:inline-block;
+  font-family:var(--font-stamp);
+  font-size:10px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:2px;
+  margin-bottom:2px;
+}
+.etiqueta-estado.libre{background:rgba(46,83,89,0.14);color:var(--sello-azul)}
+.etiqueta-estado.traduciendo{background:rgba(169,132,63,0.18);color:var(--latón)}
+.etiqueta-estado.revisando{background:rgba(169,132,63,0.28);color:var(--latón)}
+.etiqueta-estado.terminada{background:rgba(163,57,44,0.14);color:var(--sello-rojo)}
 </style>
 </head>
 <body>
@@ -448,6 +584,10 @@ h1{
   </div>
   <p class="subtitulo">Las novelas pendientes de traducir. Cada ficha dice si está libre o si alguien ya la ha escogido, para no duplicar el trabajo.</p>
 </header>
+
+<div class="barra-sesion" id="barraSesion"></div>
+
+<div class="panel-progreso" id="panelProgreso" style="display:none"></div>
 
 <div class="controles">
   <div class="buscador">
@@ -467,8 +607,30 @@ h1{
   <div class="modal" id="modal"></div>
 </div>
 
+<div class="overlay" id="overlayAuth">
+  <div class="modal modal-auth" id="modalAuth"></div>
+</div>
+
 <script src="books-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+/* ============================================================
+   CONFIGURACIÓN DE SUPABASE
+   ============================================================ */
+const SUPABASE_URL = 'https://eyotgkxdrigknhxueqsx.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_z1KYr5Ii8UnF5iib-pisGQ_KxyvVFJk';
+const supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let sesionActual = null;      // { user } de Supabase Auth, o null
+let progresoPorLibro = {};    // { libro_id: filaDeProgreso }
+
+const ESTADOS = {
+  libre:       'Libre',
+  traduciendo: 'Traduciendo',
+  revisando:   'Revisando',
+  terminada:   'Terminada'
+};
+
 let filtroActivo = 'todos';
 let textoBusqueda = '';
 
@@ -483,10 +645,47 @@ function coincideBusqueda(libro, texto){
   return libro.titulo.toLowerCase().includes(t) || libro.autora.toLowerCase().includes(t);
 }
 
+/* Combina lo que dice books-data.js con el progreso vivo de Supabase.
+   Si una novela tiene fila en Supabase, esa fila manda sobre el "escogida"
+   del JSON. Si no tiene fila, se queda como estaba en el JSON (libre). */
+function estadoDe(libro){
+  const p = progresoPorLibro[libro.id];
+  if(p){
+    return {
+      escogida: p.escogida,
+      escogidaPor: p.escogida_por || '',
+      estado: p.estado || (p.escogida ? 'traduciendo' : 'libre'),
+      progreso_porcentaje: p.progreso_porcentaje,
+      capitulo_actual: p.capitulo_actual,
+      capitulos_total: p.capitulos_total
+    };
+  }
+  return {
+    escogida: !!libro.escogida,
+    escogidaPor: libro.escogidaPor || '',
+    estado: libro.escogida ? 'traduciendo' : 'libre',
+    progreso_porcentaje: null,
+    capitulo_actual: null,
+    capitulos_total: null
+  };
+}
+
+function chipProgreso(info){
+  if(!info.escogida) return '';
+  let extra = '';
+  if(info.progreso_porcentaje !== null && info.progreso_porcentaje !== undefined){
+    extra = ` · ${info.progreso_porcentaje}%`;
+  } else if(info.capitulo_actual){
+    extra = ` · cap. ${info.capitulo_actual}${info.capitulos_total ? '/' + info.capitulos_total : ''}`;
+  }
+  return `<span class="etiqueta-estado ${info.estado}">${ESTADOS[info.estado] || 'Escogida'}${extra}</span>`;
+}
+
 function render(){
   const filtrados = LIBROS.filter(libro=>{
-    if(filtroActivo === 'libre' && libro.escogida) return false;
-    if(filtroActivo === 'escogida' && !libro.escogida) return false;
+    const info = estadoDe(libro);
+    if(filtroActivo === 'libre' && info.escogida) return false;
+    if(filtroActivo === 'escogida' && !info.escogida) return false;
     return coincideBusqueda(libro, textoBusqueda);
   });
 
@@ -499,10 +698,12 @@ function render(){
     return;
   }
 
-  rejilla.innerHTML = filtrados.map((libro)=>`
+  rejilla.innerHTML = filtrados.map((libro)=>{
+    const info = estadoDe(libro);
+    return `
     <article class="ficha" tabindex="0" data-idx="${LIBROS.indexOf(libro)}">
       <div class="perforacion"></div>
-      <div class="sello ${libro.escogida?'escogida':'libre'}">${libro.escogida?'Escogida':'Libre'}</div>
+      <div class="sello ${info.escogida?'escogida':'libre'}">${info.escogida?'Escogida':'Libre'}</div>
       ${(libro.nueva || libro.serie) ? `
       <div class="etiquetas-top">
         ${libro.nueva ? '<span class="etiqueta-nueva">Nueva</span>' : ''}
@@ -516,10 +717,11 @@ function render(){
       <div class="autora-libro">${escapeHtml(libro.autora)}</div>
       ${libro.saga ? `<div class="saga-libro">${escapeHtml(libro.saga)}${libro.sagaNumero ? ' · #' + libro.sagaNumero : ''}</div>` : ''}
       <div class="meta-libro"><span>${libro.anio}</span><span>${libro.paginas} pág.</span></div>
+      ${chipProgreso(info) ? `<div style="text-align:center;margin-bottom:8px">${chipProgreso(info)}</div>` : ''}
       <p class="sinopsis-preview">${escapeHtml(libro.sinopsis)}</p>
       <span class="leer-mas">Leer ficha completa →</span>
     </article>
-  `).join('');
+  `;}).join('');
 
   rejilla.querySelectorAll('.ficha').forEach(el=>{
     el.addEventListener('click', ()=>abrirModal(LIBROS[el.dataset.idx]));
@@ -530,6 +732,7 @@ function render(){
 }
 
 function abrirModal(libro){
+  const info = estadoDe(libro);
   modal.innerHTML = `
     <button class="cerrar" aria-label="Cerrar">✕</button>
     <div class="modal-top">
@@ -539,9 +742,18 @@ function abrirModal(libro){
         <div class="modal-autora">${escapeHtml(libro.autora)}</div>
         <div class="modal-meta"><span>${libro.anio}</span><span>${libro.paginas} páginas</span>${libro.serie ? '<span>Tiene serie</span>' : ''}${libro.nueva ? '<span>Nueva</span>' : ''}</div>
         ${libro.saga ? `<div class="modal-meta" style="margin-top:-6px"><span>Saga: ${escapeHtml(libro.saga)}${libro.sagaNumero ? ' #' + libro.sagaNumero : ''}</span></div>` : ''}
-        <span class="modal-estado ${libro.escogida?'escogida':'libre'}">
-          ${libro.escogida ? ('Escogida' + (libro.escogidaPor ? ' por ' + escapeHtml(libro.escogidaPor) : '')) : 'Libre para traducir'}
+        <span class="modal-estado ${info.escogida?'escogida':'libre'}">
+          ${info.escogida ? (escapeHtml(ESTADOS[info.estado] || 'Escogida') + (info.escogidaPor ? ' por ' + escapeHtml(info.escogidaPor) : '')) : 'Libre para traducir'}
         </span>
+        ${info.escogida && info.progreso_porcentaje !== null && info.progreso_porcentaje !== undefined ? `
+          <div class="barra-porcentaje" style="margin-top:10px;max-width:220px">
+            <div class="barra-porcentaje-relleno" style="width:${info.progreso_porcentaje}%"></div>
+          </div>
+          <div style="font-size:11px;color:var(--tinta-suave);margin-top:4px">${info.progreso_porcentaje}% traducido</div>
+        ` : ''}
+        ${info.escogida && !info.progreso_porcentaje && info.capitulo_actual ? `
+          <div style="font-size:11px;color:var(--tinta-suave);margin-top:6px">Capítulo ${info.capitulo_actual}${info.capitulos_total ? ' de ' + info.capitulos_total : ''}</div>
+        ` : ''}
       </div>
     </div>
     <div class="modal-sinopsis">${escapeHtml(libro.sinopsis)}</div>
@@ -579,7 +791,243 @@ function escapeHtml(str){
   return div.innerHTML;
 }
 
-render();
+/* ============================================================
+   PROGRESO (lectura pública desde Supabase)
+   ============================================================ */
+async function cargarProgreso(){
+  const { data, error } = await supa.from('novelas_traducir').select('*');
+  if(error){ console.error('Error cargando progreso:', error); return; }
+  progresoPorLibro = {};
+  (data || []).forEach(fila => { progresoPorLibro[fila.libro_id] = fila; });
+}
+
+/* ============================================================
+   SESIÓN / AUTENTICACIÓN
+   ============================================================ */
+const overlayAuth = document.getElementById('overlayAuth');
+const modalAuth = document.getElementById('modalAuth');
+const barraSesion = document.getElementById('barraSesion');
+const panelProgreso = document.getElementById('panelProgreso');
+
+async function cargarSesion(){
+  const { data } = await supa.auth.getSession();
+  sesionActual = data.session;
+}
+
+function renderBarraSesion(){
+  if(sesionActual){
+    const email = sesionActual.user.email;
+    barraSesion.innerHTML = `
+      <span class="quien">${escapeHtml(email)}</span>
+      <button id="btnCerrarSesion">Cerrar sesión</button>
+    `;
+    document.getElementById('btnCerrarSesion').addEventListener('click', async ()=>{
+      await supa.auth.signOut();
+      sesionActual = null;
+      renderBarraSesion();
+      await renderPanelProgreso();
+    });
+  } else {
+    barraSesion.innerHTML = `<button id="btnAbrirAuth">Iniciar sesión / Registrarme</button>`;
+    document.getElementById('btnAbrirAuth').addEventListener('click', ()=>abrirModalAuth());
+  }
+}
+
+function abrirModalAuth(pestañaInicial='login'){
+  renderModalAuth(pestañaInicial);
+  overlayAuth.classList.add('abierto');
+}
+function cerrarModalAuth(){
+  overlayAuth.classList.remove('abierto');
+}
+overlayAuth.addEventListener('click', e=>{ if(e.target === overlayAuth) cerrarModalAuth(); });
+
+function renderModalAuth(pestaña){
+  modalAuth.innerHTML = `
+    <button class="cerrar" aria-label="Cerrar">✕</button>
+    <div class="auth-tabs">
+      <button class="auth-tab ${pestaña==='login'?'activo':''}" data-tab="login">Iniciar sesión</button>
+      <button class="auth-tab ${pestaña==='registro'?'activo':''}" data-tab="registro">Registrarme</button>
+    </div>
+    <div id="authContenido"></div>
+    <div class="auth-error" id="authError"></div>
+  `;
+  modalAuth.querySelector('.cerrar').addEventListener('click', cerrarModalAuth);
+  modalAuth.querySelectorAll('.auth-tab').forEach(t=>{
+    t.addEventListener('click', ()=>renderModalAuth(t.dataset.tab));
+  });
+
+  const contenido = document.getElementById('authContenido');
+  if(pestaña === 'registro'){
+    contenido.innerHTML = `
+      <div class="campo"><label>@ de Telegram</label><input id="regTelegram" placeholder="@tuusuario"></div>
+      <div class="campo"><label>Email</label><input id="regEmail" type="email"></div>
+      <div class="campo"><label>Contraseña</label><input id="regPass" type="password" placeholder="mínimo 6 caracteres"></div>
+      <button class="boton-principal" id="btnRegistrar">Crear cuenta</button>
+    `;
+    document.getElementById('btnRegistrar').addEventListener('click', registrar);
+  } else {
+    contenido.innerHTML = `
+      <div class="campo"><label>Email</label><input id="loginEmail" type="email"></div>
+      <div class="campo"><label>Contraseña</label><input id="loginPass" type="password"></div>
+      <button class="boton-principal" id="btnLogin">Entrar</button>
+    `;
+    document.getElementById('btnLogin').addEventListener('click', iniciarSesion);
+  }
+}
+
+async function registrar(){
+  const telegram = document.getElementById('regTelegram').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value;
+  const errorEl = document.getElementById('authError');
+  errorEl.textContent = '';
+
+  if(!telegram || !email || !pass){
+    errorEl.textContent = 'Rellena los tres campos, por favor.';
+    return;
+  }
+  if(pass.length < 6){
+    errorEl.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+    return;
+  }
+
+  const { data, error } = await supa.auth.signUp({ email, password: pass });
+  if(error){ errorEl.textContent = error.message; return; }
+
+  // Guardamos el perfil (telegram + email) — necesita que la sesión ya esté activa
+  if(data.user){
+    const { error: errorPerfil } = await supa.from('perfiles').insert({
+      id: data.user.id,
+      email: email,
+      telegram: telegram
+    });
+    if(errorPerfil){ console.error('Error guardando perfil:', errorPerfil); }
+  }
+
+  sesionActual = data.session;
+  if(sesionActual){
+    cerrarModalAuth();
+    renderBarraSesion();
+    await renderPanelProgreso();
+  } else {
+    // Si el proyecto pide confirmar el email antes de iniciar sesión
+    errorEl.style.color = 'var(--sello-azul)';
+    errorEl.textContent = 'Cuenta creada. Revisa tu correo para confirmarla antes de iniciar sesión.';
+  }
+}
+
+async function iniciarSesion(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const errorEl = document.getElementById('authError');
+  errorEl.textContent = '';
+
+  const { data, error } = await supa.auth.signInWithPassword({ email, password: pass });
+  if(error){ errorEl.textContent = 'Email o contraseña incorrectos.'; return; }
+
+  sesionActual = data.session;
+  cerrarModalAuth();
+  renderBarraSesion();
+  await renderPanelProgreso();
+}
+
+/* ============================================================
+   PANEL "MI PROGRESO" (solo si la persona logueada tiene una
+   novela asignada a su email)
+   ============================================================ */
+async function renderPanelProgreso(){
+  if(!sesionActual){
+    panelProgreso.style.display = 'none';
+    panelProgreso.innerHTML = '';
+    return;
+  }
+
+  const miEmail = sesionActual.user.email;
+  const { data, error } = await supa
+    .from('novelas_traducir')
+    .select('*')
+    .eq('escogida_por_email', miEmail);
+
+  if(error || !data || data.length === 0){
+    panelProgreso.style.display = 'none';
+    panelProgreso.innerHTML = '';
+    return;
+  }
+
+  panelProgreso.style.display = 'block';
+  panelProgreso.innerHTML = data.map(fila=>{
+    const libro = LIBROS.find(l => l.id === fila.libro_id);
+    const titulo = libro ? libro.titulo : fila.libro_id;
+    return `
+    <div class="tarjeta-progreso" style="margin-bottom:16px">
+      <h2>Tu progreso — ${escapeHtml(titulo)}</h2>
+      <div class="fila-progreso">
+        <div class="campo">
+          <label>Estado</label>
+          <select data-libro="${fila.libro_id}" class="campo-estado">
+            ${Object.entries(ESTADOS).filter(([k])=>k!=='libre').map(([k,v])=>
+              `<option value="${k}" ${fila.estado===k?'selected':''}>${v}</option>`
+            ).join('')}
+          </select>
+        </div>
+        <div class="campo">
+          <label>Progreso (%)</label>
+          <input type="number" min="0" max="100" data-libro="${fila.libro_id}" class="campo-porcentaje" value="${fila.progreso_porcentaje ?? ''}">
+        </div>
+      </div>
+      <div class="fila-progreso">
+        <div class="campo">
+          <label>Capítulo actual</label>
+          <input type="number" min="0" data-libro="${fila.libro_id}" class="campo-cap-actual" value="${fila.capitulo_actual ?? ''}">
+        </div>
+        <div class="campo">
+          <label>Capítulos totales</label>
+          <input type="number" min="0" data-libro="${fila.libro_id}" class="campo-cap-total" value="${fila.capitulos_total ?? ''}">
+        </div>
+      </div>
+      <button class="boton-principal" data-libro="${fila.libro_id}" onclick="guardarProgreso('${fila.libro_id}')">Guardar progreso</button>
+      <div class="auth-ok" id="guardadoOk-${fila.libro_id}"></div>
+    </div>
+  `;}).join('');
+}
+
+async function guardarProgreso(libroId){
+  const estado = document.querySelector(`.campo-estado[data-libro="${libroId}"]`).value;
+  const porcentajeStr = document.querySelector(`.campo-porcentaje[data-libro="${libroId}"]`).value;
+  const capActualStr = document.querySelector(`.campo-cap-actual[data-libro="${libroId}"]`).value;
+  const capTotalStr = document.querySelector(`.campo-cap-total[data-libro="${libroId}"]`).value;
+
+  const { error } = await supa.from('novelas_traducir').update({
+    estado: estado,
+    progreso_porcentaje: porcentajeStr === '' ? null : Number(porcentajeStr),
+    capitulo_actual: capActualStr === '' ? null : Number(capActualStr),
+    capitulos_total: capTotalStr === '' ? null : Number(capTotalStr)
+  }).eq('libro_id', libroId);
+
+  const okEl = document.getElementById('guardadoOk-' + libroId);
+  if(error){
+    okEl.style.color = 'var(--sello-rojo)';
+    okEl.textContent = 'No se pudo guardar: ' + error.message;
+    return;
+  }
+  okEl.style.color = 'var(--sello-azul)';
+  okEl.textContent = '✓ Guardado';
+  await cargarProgreso();
+  render();
+}
+
+/* ============================================================
+   ARRANQUE
+   ============================================================ */
+async function iniciar(){
+  await cargarSesion();
+  await cargarProgreso();
+  renderBarraSesion();
+  await renderPanelProgreso();
+  render();
+}
+iniciar();
 </script>
 
 </body>
