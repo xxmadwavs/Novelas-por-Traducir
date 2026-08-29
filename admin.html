@@ -240,6 +240,50 @@ textarea#salida{
   margin-top:8px;
   height:14px;
 }
+
+/* asignación */
+.campo select{
+  width:100%;
+  background:var(--verde);
+  border:1px solid rgba(169,132,63,0.35);
+  color:var(--kraft);
+  font-family:var(--font-body);
+  font-size:13px;
+  padding:10px 12px;
+  border-radius:2px;
+}
+.login-box{max-width:340px}
+.fila-asignacion{
+  background:var(--kraft);
+  color:var(--tinta);
+  border-radius:2px;
+  padding:14px 16px;
+  margin-bottom:10px;
+}
+.fila-asignacion .fila-titulo{font-family:var(--font-display);font-weight:600;font-size:15px;margin-bottom:8px}
+.fila-asignacion .fila-controles{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.fila-asignacion select, .fila-asignacion input{
+  background:#fff;
+  border:1px solid rgba(107,95,79,0.35);
+  color:var(--tinta);
+  font-family:var(--font-body);
+  font-size:12px;
+  padding:7px 9px;
+  border-radius:2px;
+}
+.estado-actual{
+  font-family:var(--font-stamp);
+  font-size:10px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:2px;
+  background:rgba(46,83,89,0.12);
+  color:var(--sello-azul);
+  margin-bottom:8px;
+  display:inline-block;
+}
+.mensaje-auth{font-size:12px;color:var(--sello-rojo);margin-top:8px;min-height:1em}
 </style>
 </head>
 <body>
@@ -340,6 +384,32 @@ textarea#salida{
     </div>
     <p class="aviso-copiado" id="aviso"></p>
     <textarea id="salida" readonly placeholder="Pulsa «Generar código» para ver aquí el contenido de books-data.js"></textarea>
+  </section>
+
+  <section class="panel">
+    <h2>5 · Asignar traductoras</h2>
+    <p class="panel-desc">Esto se guarda directamente en Supabase (no en <code>books-data.js</code>). Inicia sesión con tu cuenta de admin para ver quién se ha registrado y asignarle una novela.</p>
+
+    <div id="cajaLoginAdmin" class="login-box">
+      <div class="campo">
+        <label for="admin-email">Email</label>
+        <input type="text" id="admin-email" autocomplete="username">
+      </div>
+      <div class="campo">
+        <label for="admin-pass">Contraseña</label>
+        <input type="password" id="admin-pass" autocomplete="current-password">
+      </div>
+      <button class="btn" id="btn-login-admin">Entrar</button>
+      <p class="mensaje-auth" id="mensajeAuthAdmin"></p>
+    </div>
+
+    <div id="zonaAsignacion" style="display:none">
+      <p class="panel-desc" id="quienSoy" style="margin-bottom:20px"></p>
+      <div class="buscador-lista">
+        <input type="text" id="buscar-asignacion" placeholder="Buscar novela por título…">
+      </div>
+      <div id="listaAsignacion"></div>
+    </div>
   </section>
 
 </main>
@@ -608,6 +678,163 @@ document.getElementById('btn-copiar').addEventListener('click', async ()=>{
 });
 
 renderLista();
+</script>
+
+<script src="books-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ============================================================
+   ASIGNAR TRADUCTORAS — sección 5
+   ============================================================ */
+const SUPABASE_URL = 'https://eyotgkxdrigknhxueqsx.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_z1KYr5Ii8UnF5iib-pisGQ_KxyvVFJk';
+const supa = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let perfiles = [];          // gente registrada: {id, email, telegram}
+let progresoAsignacion = {}; // libro_id -> fila de novelas_traducir
+let textoBusquedaAsignacion = '';
+
+const cajaLoginAdmin = document.getElementById('cajaLoginAdmin');
+const zonaAsignacion = document.getElementById('zonaAsignacion');
+const mensajeAuthAdmin = document.getElementById('mensajeAuthAdmin');
+const listaAsignacion = document.getElementById('listaAsignacion');
+
+document.getElementById('btn-login-admin').addEventListener('click', async ()=>{
+  const email = document.getElementById('admin-email').value.trim();
+  const pass = document.getElementById('admin-pass').value;
+  mensajeAuthAdmin.textContent = '';
+
+  const { data, error } = await supa.auth.signInWithPassword({ email, password: pass });
+  if(error){
+    mensajeAuthAdmin.textContent = 'Email o contraseña incorrectos.';
+    return;
+  }
+  await entrarComoAdmin();
+});
+
+async function entrarComoAdmin(){
+  const { data: { session } } = await supa.auth.getSession();
+  if(!session){ return; }
+
+  cajaLoginAdmin.style.display = 'none';
+  zonaAsignacion.style.display = 'block';
+  document.getElementById('quienSoy').textContent = `Conectada como ${session.user.email}`;
+
+  await cargarPerfiles();
+  await cargarProgresoAsignacion();
+  renderListaAsignacion();
+}
+
+async function cargarPerfiles(){
+  const { data, error } = await supa.from('perfiles').select('*').order('telegram');
+  if(error){
+    console.error('Error cargando perfiles:', error);
+    listaAsignacion.innerHTML = `<div class="vacio-lista">No se pudieron cargar los perfiles (¿tu email tiene permiso de admin en las políticas de Supabase?): ${escapeHtml(error.message)}</div>`;
+    perfiles = [];
+    return;
+  }
+  perfiles = data || [];
+}
+
+async function cargarProgresoAsignacion(){
+  const { data, error } = await supa.from('novelas_traducir').select('*');
+  if(error){ console.error('Error cargando progreso:', error); return; }
+  progresoAsignacion = {};
+  (data || []).forEach(fila => { progresoAsignacion[fila.libro_id] = fila; });
+}
+
+document.getElementById('buscar-asignacion').addEventListener('input', e=>{
+  textoBusquedaAsignacion = e.target.value;
+  renderListaAsignacion();
+});
+
+function renderListaAsignacion(){
+  if(typeof LIBROS === 'undefined'){
+    listaAsignacion.innerHTML = '<div class="vacio-lista">No se ha podido leer books-data.js — asegúrate de que está en la misma carpeta.</div>';
+    return;
+  }
+
+  const texto = textoBusquedaAsignacion.toLowerCase();
+  const libros = LIBROS.filter(l => !texto || l.titulo.toLowerCase().includes(texto));
+
+  if(libros.length === 0){
+    listaAsignacion.innerHTML = '<div class="vacio-lista">Ninguna novela coincide con la búsqueda.</div>';
+    return;
+  }
+
+  const opcionesPerfiles = perfiles.map(p =>
+    `<option value="${p.id}">${escapeHtml(p.telegram || '(sin telegram)')} — ${escapeHtml(p.email)}</option>`
+  ).join('');
+
+  listaAsignacion.innerHTML = libros.map(libro=>{
+    const fila = progresoAsignacion[libro.id];
+    const estadoTexto = fila
+      ? `${fila.escogida ? 'Escogida' : 'Libre'}${fila.escogida_por ? ' · ' + escapeHtml(fila.escogida_por) : ''}${fila.estado ? ' · ' + escapeHtml(fila.estado) : ''}`
+      : (libro.escogida ? `Escogida (según books-data.js) · ${escapeHtml(libro.escogidaPor||'')} — sin cuenta vinculada` : 'Libre');
+
+    return `
+    <div class="fila-asignacion" data-libro="${libro.id}">
+      <div class="fila-titulo">${escapeHtml(libro.titulo)}</div>
+      <span class="estado-actual">${estadoTexto}</span>
+      <div class="fila-controles">
+        <select class="sel-perfil" data-libro="${libro.id}">
+          <option value="">— elegir traductora —</option>
+          ${opcionesPerfiles}
+        </select>
+        <select class="sel-estado" data-libro="${libro.id}">
+          <option value="traduciendo" ${fila?.estado==='traduciendo'?'selected':''}>Traduciendo</option>
+          <option value="revisando" ${fila?.estado==='revisando'?'selected':''}>Revisando</option>
+          <option value="terminada" ${fila?.estado==='terminada'?'selected':''}>Terminada</option>
+        </select>
+        <button class="btn pequeño" onclick="asignarLibro('${libro.id}')">Asignar</button>
+        ${fila && fila.escogida ? `<button class="btn secundario pequeño" onclick="liberarLibro('${libro.id}')">Dejar libre</button>` : ''}
+      </div>
+    </div>
+  `;}).join('');
+}
+
+async function asignarLibro(libroId){
+  const select = document.querySelector(`.sel-perfil[data-libro="${libroId}"]`);
+  const selectEstado = document.querySelector(`.sel-estado[data-libro="${libroId}"]`);
+  const perfilId = select.value;
+  if(!perfilId){
+    alert('Elige primero a quién se la asignas.');
+    return;
+  }
+  const perfil = perfiles.find(p => p.id === perfilId);
+
+  const { error } = await supa.from('novelas_traducir').upsert({
+    libro_id: libroId,
+    escogida: true,
+    escogida_por: perfil.telegram || perfil.email,
+    escogida_por_email: perfil.email,
+    estado: selectEstado.value
+  }, { onConflict: 'libro_id' });
+
+  if(error){
+    alert('No se pudo asignar: ' + error.message);
+    return;
+  }
+  await cargarProgresoAsignacion();
+  renderListaAsignacion();
+}
+
+async function liberarLibro(libroId){
+  if(!confirm('¿Dejar esta novela libre otra vez? Se borrará su progreso guardado.')) return;
+  const { error } = await supa.from('novelas_traducir').delete().eq('libro_id', libroId);
+  if(error){
+    alert('No se pudo liberar: ' + error.message);
+    return;
+  }
+  await cargarProgresoAsignacion();
+  renderListaAsignacion();
+}
+
+// Si ya había sesión abierta (recargaste la página), entra directo
+(async ()=>{
+  const { data: { session } } = await supa.auth.getSession();
+  if(session) await entrarComoAdmin();
+})();
 </script>
 
 </body>
