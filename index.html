@@ -760,6 +760,10 @@ function abrirModal(libro){
           </div>
           <div style="font-size:11px;color:var(--tinta-suave);margin-top:4px">${porcentajeModal}% traducido</div>
         ` : ''}
+        ${!info.escogida ? (sesionActual
+          ? `<button class="boton-principal" style="margin-top:14px" onclick="elegirLibro('${libro.id}')">Elegir esta novela para traducir</button>`
+          : `<button class="boton-principal" style="margin-top:14px" onclick="cerrarModal(); abrirModalAuth('login');">Inicia sesión para elegir esta novela</button>`
+        ) : ''}
       </div>
     </div>
     <div class="modal-sinopsis">${escapeHtml(libro.sinopsis)}</div>
@@ -935,6 +939,51 @@ async function iniciarSesion(){
   sesionActual = data.session;
   cerrarModalAuth();
   renderBarraSesion();
+  await renderPanelProgreso();
+}
+
+/* ============================================================
+   ELEGIR NOVELA (autoasignación desde la web)
+   ============================================================ */
+async function elegirLibro(libroId){
+  if(!sesionActual){
+    cerrarModal();
+    abrirModalAuth('login');
+    return;
+  }
+  if(!confirm('¿Quieres elegir esta novela para traducir?')) return;
+
+  const email = sesionActual.user.email;
+  let escogidaPor = email;
+  const { data: perfil } = await supa.from('perfiles').select('telegram').eq('id', sesionActual.user.id).single();
+  if(perfil && perfil.telegram) escogidaPor = perfil.telegram;
+
+  // Volvemos a comprobar en el momento de guardar, por si alguien se
+  // adelantó a elegirla mientras tú tenías la ficha abierta.
+  const { data: filaActual } = await supa.from('novelas_traducir').select('escogida').eq('libro_id', libroId).maybeSingle();
+  if(filaActual && filaActual.escogida){
+    alert('Vaya, alguien se te ha adelantado y ya ha elegido esta novela.');
+    await cargarProgreso();
+    render();
+    cerrarModal();
+    return;
+  }
+
+  const { error } = await supa.from('novelas_traducir').upsert({
+    libro_id: libroId,
+    escogida: true,
+    escogida_por: escogidaPor,
+    escogida_por_email: email,
+    estado: 'traduciendo'
+  }, { onConflict: 'libro_id' });
+
+  if(error){
+    alert('No se pudo elegir la novela: ' + error.message);
+    return;
+  }
+  cerrarModal();
+  await cargarProgreso();
+  render();
   await renderPanelProgreso();
 }
 
