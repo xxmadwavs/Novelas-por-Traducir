@@ -3,8 +3,8 @@
    Puedes seguir editándolo a mano o volver a generarlo desde admin.html.
 
    Campos:
-     id (identificador único, NO cambiar una vez creado — se usa para
-       vincular esta novela con su fila de progreso en Supabase),
+     id (identificador único, NO cambiar una vez creado — vincula esta
+       novela con su fila de progreso en Supabase),
      titulo, autora, anio, paginas, portada, sinopsis,
      escogida (true/false), escogidaPor (opcional),
      serie (true/false), saga (opcional), sagaNumero (opcional),
