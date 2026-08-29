@@ -530,9 +530,10 @@ const LIBROS = [
     "sinopsis": "Zhaojun era una estudiante universitaria más durante el día, pero por la noche, se adentra en un mundo secreto de encuentros de alto riesgo y deseos ocultos. Compaginando los estudios, sus amigas y la presión de su trabajo poco convencional, jamás imaginó que una reunión rutinaria se convertiría en un momento que podría cambiarlo todo.\nCuando una misteriosa clienta, Namnueng, se cruzó en su camino, Zhaojun tuvo que enfrentarse a la tensión entre el deseo, el peligro y las decisiones que definirían su verdadera identidad. Si a esto le agregabamos amigas que se preocupan demasiado, profesores que saben demasiado y secretos que se resisten a permanecer enterrados, de repente, cada decisión comenzó a tener un peso que iba mucho más allá del dinero.\n¿Podrá sobrevivir a la emoción y el riesgo de un mundo donde las apariencias engañan y los límites se desdibujan, o un solo encuentro cambiará su vida para siempre?",
     "escogida": false,
     "escogidaPor": "",
-    "serie": false,
+    "serie": true,
     "saga": "",
-    "sagaNumero": null
+    "sagaNumero": null,
+    "nueva": false
   },
   {
     "titulo": "Laundry Love Chaos",
