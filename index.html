@@ -971,38 +971,57 @@ async function renderPanelProgreso(){
             ).join('')}
           </select>
         </div>
-        <div class="campo">
-          <label>Progreso (%)</label>
-          <input type="number" min="0" max="100" data-libro="${fila.libro_id}" class="campo-porcentaje" value="${fila.progreso_porcentaje ?? ''}">
-        </div>
       </div>
       <div class="fila-progreso">
         <div class="campo">
           <label>Capítulo actual</label>
-          <input type="number" min="0" data-libro="${fila.libro_id}" class="campo-cap-actual" value="${fila.capitulo_actual ?? ''}">
+          <input type="number" min="0" data-libro="${fila.libro_id}" class="campo-cap-actual" value="${fila.capitulo_actual ?? ''}" oninput="actualizarPorcentajeCalculado('${fila.libro_id}')">
         </div>
         <div class="campo">
           <label>Capítulos totales</label>
-          <input type="number" min="0" data-libro="${fila.libro_id}" class="campo-cap-total" value="${fila.capitulos_total ?? ''}">
+          <input type="number" min="0" data-libro="${fila.libro_id}" class="campo-cap-total" value="${fila.capitulos_total ?? ''}" oninput="actualizarPorcentajeCalculado('${fila.libro_id}')">
         </div>
       </div>
+      <div class="campo-porcentaje-calculado" id="porcentajeCalculado-${fila.libro_id}" style="font-size:12px;color:var(--tinta-suave);margin-bottom:12px"></div>
       <button class="boton-principal" data-libro="${fila.libro_id}" onclick="guardarProgreso('${fila.libro_id}')">Guardar progreso</button>
       <div class="auth-ok" id="guardadoOk-${fila.libro_id}"></div>
     </div>
   `;}).join('');
+
+  // Pintamos el % calculado inicial de cada tarjeta ya renderizada
+  data.forEach(fila => actualizarPorcentajeCalculado(fila.libro_id));
+}
+
+// El % ya no se escribe a mano: se calcula siempre a partir de los capítulos.
+function calcularPorcentaje(capActual, capTotal){
+  if(!capTotal || capTotal <= 0 || capActual === null || capActual === undefined) return null;
+  const pct = Math.round((capActual / capTotal) * 100);
+  return Math.max(0, Math.min(100, pct));
+}
+
+function actualizarPorcentajeCalculado(libroId){
+  const capActualStr = document.querySelector(`.campo-cap-actual[data-libro="${libroId}"]`).value;
+  const capTotalStr = document.querySelector(`.campo-cap-total[data-libro="${libroId}"]`).value;
+  const capActual = capActualStr === '' ? null : Number(capActualStr);
+  const capTotal = capTotalStr === '' ? null : Number(capTotalStr);
+  const pct = calcularPorcentaje(capActual, capTotal);
+  const el = document.getElementById('porcentajeCalculado-' + libroId);
+  if(!el) return;
+  el.textContent = pct === null ? '' : `${pct}% calculado a partir de los capítulos`;
 }
 
 async function guardarProgreso(libroId){
   const estado = document.querySelector(`.campo-estado[data-libro="${libroId}"]`).value;
-  const porcentajeStr = document.querySelector(`.campo-porcentaje[data-libro="${libroId}"]`).value;
   const capActualStr = document.querySelector(`.campo-cap-actual[data-libro="${libroId}"]`).value;
   const capTotalStr = document.querySelector(`.campo-cap-total[data-libro="${libroId}"]`).value;
+  const capActual = capActualStr === '' ? null : Number(capActualStr);
+  const capTotal = capTotalStr === '' ? null : Number(capTotalStr);
 
   const { error } = await supa.from('novelas_traducir').update({
     estado: estado,
-    progreso_porcentaje: porcentajeStr === '' ? null : Number(porcentajeStr),
-    capitulo_actual: capActualStr === '' ? null : Number(capActualStr),
-    capitulos_total: capTotalStr === '' ? null : Number(capTotalStr)
+    progreso_porcentaje: calcularPorcentaje(capActual, capTotal),
+    capitulo_actual: capActual,
+    capitulos_total: capTotal
   }).eq('libro_id', libroId);
 
   const okEl = document.getElementById('guardadoOk-' + libroId);
