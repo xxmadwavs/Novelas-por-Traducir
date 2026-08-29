@@ -5,10 +5,28 @@
    Campos:
      titulo, autora, anio, paginas, portada, sinopsis,
      escogida (true/false), escogidaPor (opcional),
-     serie (true/false), saga (opcional), sagaNumero (opcional)
+     serie (true/false), saga (opcional), sagaNumero (opcional),
+     nueva (true/false)
+
+   El orden de este array es el orden en que se muestran las novelas
+   en la web: las más nuevas van arriba del todo.
    ============================================================ */
 
 const LIBROS = [
+  {
+    "titulo": "Clock",
+    "autora": "ChaoPlanoy",
+    "anio": 2026,
+    "paginas": 460,
+    "portada": "https://cdn-local.mebmarket.com/meb/server1/463417/Thumbnail/book_detail_large.gif?3",
+    "sinopsis": "Me «partió el corazón» y me dolió muchísimo ver cómo «Pi Waad Fan», de quien llevaba tanto tiempo enamorada en secreto, se casaba ante mis propios ojos.\n\nPero lo que más me dolió fue enterarme, en el último momento, de que «a él también le gustaba escribir», pero ya era demasiado tarde.\n\nCon un dolor que me volvía loca, salí corriendo de la boda, pero tropecé y caí por las escaleras, golpeándome la cabeza contra el suelo. Cuando volví en mí, descubrí que había retrocedido cinco años en el tiempo.\n\nParece que Dios está de mi lado y me ha dado la oportunidad de volver atrás para arreglarlo todo.\n\nYa no habrá más «y si…».\n\n¡Porque no voy a permitir que vuelva a pasar nada de eso!",
+    "escogida": false,
+    "escogidaPor": "",
+    "serie": false,
+    "saga": "",
+    "sagaNumero": null,
+    "nueva": true
+  },
   {
     "titulo": "Ferris Wheel",
     "autora": "reallyb",
@@ -29,8 +47,8 @@ const LIBROS = [
     "paginas": 254,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/458658/Thumbnail/book_detail_large.gif?5",
     "sinopsis": "La distancia puede suponer un reto para las parejas. Pero cuando se trata de la amistad, por muy lejos que estén dos personas, no hay motivo para preocuparse.\n\nAva y Mena comparten esa convicción. Lo que no saben es que crecer sin verse la una a la otra es el comienzo de un cambio profundo.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "Roller Coaster",
     "sagaNumero": 4
@@ -42,8 +60,8 @@ const LIBROS = [
     "paginas": 269,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/387391/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Merry-Go-Round te invita a contemplar la vida sencilla de un día cualquiera, pero llena de una calidez que te llega al corazón, de la mujer de esa casa: una joven ingeniera alemana, una persona a la que le da más miedo que a nadie montarse en una montaña rusa y la propietaria de P. Art Studio, que sigue siendo la favorita tanto de los niños pequeños como de los mayores y de los adultos.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "Roller Coaster",
     "sagaNumero": 6
@@ -55,8 +73,8 @@ const LIBROS = [
     "paginas": 395,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/256122/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Alguien dijo una vez: «Un ex es para olvidarlo, no para amarlo». Pero, en el caso de cierto ex, el corazón simplemente no puede olvidarlo. Es más, sigue aferrándose a ese amor. ¿Qué debo hacer?\n\nJaokha no quiere tener «un exnovio favorito», mientras que Papie desea con todas sus fuerzas volver y ser «el nuevo novio».\n.\n.\n«¿Puedes alejarte?»\n«¿Cuánto?»\n«Más lejos que esto».\n«Pero estoy intentando reconciliarme contigo. Si estoy más lejos, ¿cómo voy a hacerlo?»",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "BE MINE",
     "sagaNumero": 4
@@ -68,8 +86,8 @@ const LIBROS = [
     "paginas": 236,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/30868/Thumbnail/book_detail_large.gif?15",
     "sinopsis": "Esperar para volver a amarnos… o\n.\n\nUn nuevo amor para no tener que esperar sin esperanza",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "TSOU",
     "sagaNumero": 3
@@ -81,8 +99,8 @@ const LIBROS = [
     "paginas": 343,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/80385/Thumbnail/book_detail_large.gif?8",
     "sinopsis": "El amor de los tres de nosotros\n.\nLa elección\n.\n.\nConclusión\n.\nEl amor",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "TSOU",
     "sagaNumero": 4
@@ -94,8 +112,8 @@ const LIBROS = [
     "paginas": 339,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/139291/Thumbnail/book_detail_large.gif?4",
     "sinopsis": "La primera vez que cruzamos la mirada, me dio...\n¡una palmada!\nFue una palmada de verdad, y me dolió de verdad.\n. .\n.\nElla... quiere a Pam.\nY está más que convencida de que\nPam... también la quiere.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "TSOU",
     "sagaNumero": 6
@@ -120,8 +138,8 @@ const LIBROS = [
     "paginas": 416,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/83797/Thumbnail/book_detail_large.gif?9",
     "sinopsis": "Mi definición de «malvado»: en pocas palabras, «el hermano Jeans»\n\n¿Es posible que nos enamoremos de alguien tan malvado?\n\nYo, Lukanai, nunca pensé en este tipo de experiencias cuando empecé mi primer curso de la universidad, hasta el día en que cometí el error de hacerme enemiga de la pandilla «Asarpis», liderada por la hija del rector. Ella fue quien forzó mi taquilla para robarme el cuaderno de autógrafos de los alumnos de cursos superiores; fue quien tiró mi móvil al agua por diversión; y además me llamaba «patita», porque, según ella, me gustaba seguirla a todas partes... Pero es verdad, porque...\n...\n¡Me estoy enamorando de la villana!",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "REVERSE 4 YOU",
     "sagaNumero": 2
@@ -133,8 +151,8 @@ const LIBROS = [
     "paginas": 431,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/441747/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "BDSM\n\nTodo comienza con un juego de copas en la fiesta de fin de año de la empresa.\nNamcha, una oficinista corriente que se siente vacía y sin rumbo, ya ha redactado su carta de dimisión. Tiene pensado dejarlo en cuanto empiece el año nuevo y volver a casa para encontrarle sentido a su vida. Pero esa noche, el destino la sitúa en el mismo grupo de copas que la única mujer de la que nunca imaginó que podría acercarse.\nGerana —a quien todos llaman Miss G—, la directora ejecutiva de ventas. Elegante, serena y absolutamente inalcanzable, domina la sala sin siquiera esforzarse. Cuando la botella se detiene frente a Namcha, un simple juego de «Verdad o reto» se convierte en algo completamente distinto. La voz de Miss G es suave, su sonrisa dulce pero peligrosa:\n«¿Te atreverías a arrodillarte y besar la punta de mi tacón de aguja?».\nNamcha obedece, temblando, y algo dentro de ella se despierta. Algo que lleva años reprimiendo. Al levantarse, sus ojos se fijan en un tatuaje familiar en el tobillo de la señorita G, idéntico al de una Ama a la que ha seguido en secreto por Internet.\nDe repente, su vida vacía tiene un rumbo. Pero el camino por delante no es sencillo. Miss G se yergue a una altura inalcanzable y, lo que es peor, cuando Namcha intenta tantear el terreno, Miss G sonríe dulcemente y se hace la inocente, como si no tuviera ni idea de lo que significa siquiera el BDSM.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -146,8 +164,8 @@ const LIBROS = [
     "paginas": 147,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/391630/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "La edición especial traducida al inglés de la tan esperada superproducción tailandesa GL «4 Elements».\n\nEn esta conmovedora edición especial de «The Wathinwanits», las historias no terminan, sino que florecen de nuevo.\nReúnete de nuevo con tus parejas favoritas de la exitosa serie «Four Elements» mientras dan un paso hacia la vida más allá de la primera confesión de amor.\nDesde el vínculo profundamente arraigado entre Din y Rose («La Tierra»), hasta las olas sanadoras que rodean a Nam y Lada («El Agua»), la pasión que se respira en el aire con Lom y Blew («El Aire») y la ardiente devoción entre Fai y Kaphrao («El Fuego»), esta recopilación teje un tapiz de afecto duradero, momentos divertidos y ecos emocionales que perduran mucho después del último beso.\nY justo cuando crees que el amor no podría ser más profundo, aparecen los pequeños, que iluminan cada página con alegría, caos y las travesuras más dulces.\nUna celebración del amor sáfico en todas sus hermosas formas, este es un volumen para quienes creen que la mejor parte de una historia de amor comienza después del «y vivieron felices para siempre».",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "4 Elements",
     "sagaNumero": 5
@@ -159,8 +177,8 @@ const LIBROS = [
     "paginas": 449,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/416826/Thumbnail/book_detail_large.gif?6",
     "sinopsis": "Es la actriz número uno del país.\nEs adorada. Es imparable…\nHasta la noche en que su corona empieza a resbalarse.\n\nCuando la «reina» Kirana pierde su cuarto premio frente a una audaz estrella en ascenso, la desesperación se apodera de ella. Esto la lleva directamente a Mae Mhor «Bai Nat» Akirah, una chamán de mala fama.\n\nRituales, amuletos, visitas secretas… nada está fuera de los límites en su búsqueda por recuperar su destino.\n\nPero a medida que la ambición, la superstición y la atracción prohibida se entrelazan entre la superestrella y la mística, una pregunta persiste: ¿la magia la devolverá a la cima o destruirá todo lo que ha construido?",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -172,8 +190,8 @@ const LIBROS = [
     "paginas": 369,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/448468/Thumbnail/book_detail_large.gif?5",
     "sinopsis": "Cuando Warisa se ve obligada a encontrar una forma de salvar la fábrica Kitwanit de su padre, que está al borde de la quiebra,\nacepta un trato que le garantizará el dinero necesario para\nsaldar sus deudas casándose con Woranit, la problemática hija de un\ndestacado político.\nLo que comienza como un matrimonio basado en intereses y obligaciones pronto\nse complica. A medida que los muros se van derrumbando poco a poco y los corazones cautelosos empiezan a\nvacilar, ¿se transformará su acuerdo en un afecto genuino y en amor verdadero,\no no fue más que un engaño cuidadosamente urdido desde el mismísimo\nprincipio?",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -185,8 +203,8 @@ const LIBROS = [
     "paginas": 393,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/454786/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Empujada por una necesidad desesperada de dinero, Nannapas acepta un trabajo extraño: hacerse pasar por la novia falsa de Kaewklao, una mujer de la alta sociedad catorce años mayor que ella.\n\nPero el sueldo tiene un alto precio. Kaewklao es una persona egocéntrica y controladora, decidida a seguir soltera a toda costa. Lo que comenzó como una simple farsa para la familia se convierte rápidamente en una auténtica guerra de voluntades. Nannapas debe sobrevivir a las exigencias tiránicas de una «tía mandona» empeñada en convertirla en la dama perfecta.\n\nCuando una chica motivada por el dinero se encuentra con una socialité egoísta, el caos es inevitable. Pero, ¿podría este romance falso dar lugar a una conexión real con la que ninguna de las dos contaba?",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -198,8 +216,8 @@ const LIBROS = [
     "paginas": 385,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/391631/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Keow es la villana a la que todo el mundo adora odiar. Jao-oei es la estrella del momento: está en pleno ascenso y es intocable. Pero, ¿qué ocurre cuando empiezan a saltar chispas fuera de la pantalla?\nLa veterana actriz Keerati (Keow) lo ha soportado todo: cotilleos, traiciones, romances inventados para la tele. Pero nunca se esperaba que Dujdara (Jao-oei), su joven y guapa coprotagonista y supuesta rival en la pantalla, se acurrucara a su lado como si fuera su almohada favorita, le susurrara frases provocadoras que no estaban en el guion y difuminara todos los límites entre la interpretación y la realidad. Entre entradas fallidas, caricias prolongadas y sorpresas nocturnas, Keerati se ve arrastrada a una escena que nunca ensayó, una que podría reescribir todo lo que creía saber sobre el amor.\nCuando las cámaras dejan de rodar, comienza la verdadera historia. Un romance lésbico que va creciendo poco a poco, tierno pero travieso, lleno de travesuras, malentendidos y una química tan magnética que se niega a ser ignorada.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -211,8 +229,8 @@ const LIBROS = [
     "paginas": 126,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/141810/Thumbnail/book_detail_large.gif?1",
     "sinopsis": "Hola a todos los aficionados a las novelas. Os traemos otra historia para compartir la alegría de fin de año con el proyecto «Devolviendo la alegría a los lectores»: YURI FOR YOU & FELIZ AÑO NUEVO. La novela «Misión de amor: 180 días» es una historia en la que la autora ha imaginado y adaptado la sociedad actual de las redes sociales a una novela corta. Narra la historia de dos chicas que se han enamorado en secreto en el mundo virtual y que, por diversas circunstancias, se ven obligadas a participar juntas en una misión del reality show titulado «Misión de amor: 180 días». ¿Cómo se desarrollará la historia? No dejéis de leerla para descubrirlo.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -224,8 +242,8 @@ const LIBROS = [
     "paginas": 455,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/427938/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Hace cuatro años, Weerin le rompió el corazón a Ranrawee sin dar ninguna explicación.\n\nAlejó a la mujer a la que amaba, convencida de que era la única forma de salvarla de un futuro doloroso. Pero parece que el destino aún no ha terminado con ellas.\nCuando Ranrawee regresa a Tailandia, ya no es la misma mujer que se marchó con el corazón roto. Es más fuerte, más fría… y no ha vuelto sola. A su lado están Viangping y Nannam, dos adorables gemelas cuyos ojos desprenden una calidez que a Weerin le resulta dolorosamente familiar.\nAl cruzarse sus caminos una vez más, los viejos sentimientos se reavivan y los muros comienzan a derrumbarse. Pero, ¿se puede reparar una confianza rota cuando por fin se revele el secreto que se esconde tras su separación? ¿Y se hará realidad por fin la «familia perfecta» con la que una vez soñaron?\n\nEl amor merece una segunda oportunidad… pero solo si el corazón es lo suficientemente valiente como para perdonar.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -237,8 +255,8 @@ const LIBROS = [
     "paginas": 1316,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/444933/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Sita es famosa por ser el personaje más hermoso de la literatura clásica tailandesa. \"Phiangfah\" también es reconocida por su belleza, tanto que es coronada como Miss Siam 1938.\n\nEl destino la lleva a conocer a \"Mom Chao Varinlada\", una dama aristócrata cuya gracia y elegancia son admiradas por todos en la capital. Phiangfah tiene la oportunidad de presentarse con una danza en el banquete de bienvenida para Mom Chao Varinlada, quien acaba de regresar de estudiar en el extranjero. Sin embargo, Phiangfah también queda cautivada por la belleza de la dama real. Aun así, sus diferencias de estatus social se convierten en un obstáculo para su amor, impidiéndoles actuar libremente.\n\nDe representar una prueba de amor como Sita en el escenario, Phiangfah ahora deberá luchar por su amor también en la vida real.\n\n\"Quiero saber qué piensa realmente Su Alteza Serenísima de mí.\"\n\n\n\"Si quieres oírlo, ¿no crees que yo también quisiera escucharlo?\"\n\n\n\"Me disculpo por sentir por Su Alteza Serenísima lo que se sentiría por un amante.\"\n\n\"Ah, qué encantadora eres.\"\n\n\n\"Si vas a besar, debería ser aquí, no en la mano.\"",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -263,8 +281,8 @@ const LIBROS = [
     "paginas": 523,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/342713/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Su carrera, aparentemente escandalosa, hizo que la gente la viera simplemente como una mujer hastiada.\nUno intentó acercarse a ella, impulsado únicamente por el deseo de poseer su cuerpo…\nMientras que otro estaba dispuesto a darlo todo porque la amaba…",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -276,8 +294,8 @@ const LIBROS = [
     "paginas": 353,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/461184/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Tras la imagen de una mujer que lo tiene todo, Parin esconde una relación que nadie debe llegar a conocer jamás.\n\nLo que comienza como un acuerdo temporal con Warisa se va convirtiendo poco a poco en algo que ya no puede controlar, a medida que el deseo y los sentimientos auténticos se vuelven imposibles de separar y Warisa empieza a querer algo más que un lugar en las sombras.\n\nPero Parin nunca es verdaderamente libre.\n\nMientras Warisa se sumerge cada vez más en un amor basado en el secreto, otra mujer sigue enredada en el corazón de Parin, alguien a quien no puede ni abandonar ni retener por completo.\n\nAhora, Parin se encuentra ante la disyuntiva de revelar el amor que nunca se ha atrevido a reclamar o dejar que todo se derrumbe bajo su «corazón oculto».",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -289,8 +307,8 @@ const LIBROS = [
     "paginas": 280,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/212261/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "No sé si fue por su rostro hermoso y dulce...\no por el aroma del perfume que desprendía la otra persona,\nlo que hizo que «Ran» se enamorara de aquella hermana mayor como si estuviera hechizada.\nPor su parte, aquella hermana mayor, que se había propuesto conquistar a esta joven con astucia,\nacabó viéndose atrapada por su propia trampa, sin poder liberarse como deseaba.\nAunque Ran afirmaba rotundamente que no le importaba el pasado de ella,\nsin embargo, el pasado lleno de errores es como un muro que separa el corazón de «Ann»\ncuando quien da intenta ofrecer amor por todos los medios,\nmientras que quien recibe intenta cerrar todas las puertas para que el amor no lo haga tambalear.\n\nAl final, ¿llegarán a estar juntas o no?",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "Perfume",
     "sagaNumero": 3
@@ -302,8 +320,8 @@ const LIBROS = [
     "paginas": 336,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/141681/Thumbnail/book_detail_large.gif?9",
     "sinopsis": "Después de que me pidiera matrimonio, me sentía como alguien que camina en medio del humo y no ve el camino, sin saber qué camino elegir entre seguir adelante con él o separarme de él y afrontar el futuro por mi cuenta\n\n\n\nHasta que conocí a ella, «Rattigal», una amiga de la época de la universidad con la que solo había hablado una vez, el día en que se puso el perfume Chanel n.º 5.\n\nEntonces, muchas de mis ideas cambiaron.\n\n\n\nSu aroma despierta recuerdos.\n\nSu aroma despierta sentimientos.\n\nY saca a la luz lo más profundo de mi corazón, algo que me cuesta admitir... que la amo.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "Perfume",
     "sagaNumero": 1
@@ -315,8 +333,8 @@ const LIBROS = [
     "paginas": 870,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/363927/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Como es mi hermana pequeña, lo único que puedo hacer es contener mis sentimientos.\n\nAunque no sea mi hermana biológica, ella nunca lo sabrá. Eso es lo que hace que sea más difícil que esto funcione, sobre todo cuando intenta acercarse a mí sin saber en ningún momento que esta hermana mayor suya la ve como algo más que una simple hermana pequeña. Por eso tengo que actuar como si la odiara y hacer que me malinterprete…\n\nSin saber que mi corazón se está rompiendo a causa de este amor imposible.\n\nEl amor entre la hermana mayor y la pequeña.\n\nEl amor prohibido que nadie en el mundo puede aceptar, ¡ni siquiera yo!",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -328,8 +346,8 @@ const LIBROS = [
     "paginas": 468,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/434994/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "«Si el hijo es de un hijo varón, es lógico que no se le considere nieto; pero si es de una hija, aunque sea hijo de un delincuente, sigue siendo nieto».\n\nEsta era la forma de pensar de mi abuelo respecto a los miembros de la familia, y fue el abogado de la familia quien me explicó personalmente esta idea tras la lectura del testamento, cuando tuve que enterarme de ciertos asuntos\n\nYo, «Kang», la hija menor de mi padre y mi madre, el día en que se leyó el testamento de mi abuelo, fui la única a la que no se mencionó por nombre hasta que el abogado de la familia pidió reunirse conmigo en privado y me entregó un sobre con los resultados de la prueba de ADN y la verdad de que no era hija de mi padre.\n\nY ese mismo día... me encontré con ella, «Bua Chompoo»\n\nuna joven que se dirigía a una entrevista de trabajo, pero que tropezó y cayó delante de mi coche cuando el semáforo se puso en rojo. Encontrarme con ella el mismo día de la lectura del testamento fue lo mejor que me pasó ese día, porque ambos nos enamoramos a primera vista.\n\nPero nuestro amor es un poco complicado, porque ni siquiera yo misma sé quién soy\n\nNo sabía de qué familia era hijo o nieto.\n\nLo único que confirmaba mi existencia era el resultado del análisis de ADN. Eso significaba que, si no era hijo ilegítimo, debía de ser nieto de alguna familia.\n\nAl final, seguía habiendo muchas preguntas en mi cabeza, y la principal era...\n\n¿De quién soy hijo?",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -341,8 +359,8 @@ const LIBROS = [
     "paginas": 829,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/450696/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Wanlin, una joven tailandesa-hongkonesa de 23 años, huye a Chiang Mai debido al malentendido de que sus padres quieren obligarla a contraer un matrimonio arreglado. Lo que no sabe es que muchas cosas durante este viaje cambiarán su vida para siempre; una de ellas será conocer a Ra-ping, una bailarina tradicional mayor que ella y con rostro de ángel.\n\nWanlin se siente atraída por Ra-ping desde el primer momento, y el destino parece ayudarla a conocerla mejor. Cree que le gusta Ra-ping. Lo que desconoce es que Ra-ping también ha puesto los ojos en ella.\n\nGéneros: Romance / Crecimiento personal (Coming of Age)\n\n-Esta historia se centra en el amor, la vida y la familia, y sigue una narrativa sencilla y cercana. Los personajes muestran distintas facetas de su personalidad y evolucionan a través de los conflictos que enfrentan. Algunas escenas íntimas son suaves y románticas; otras, en cambio, son muy apasionadas.\n\n-La historia se desarrolla principalmente en Chiang Mai, Tailandia.\n\n-Algunos personajes de Blossom Lady también hacen apariciones especiales en esta historia.\n\nEspero que le den una oportunidad a esta novela. Cuando conozcan a N’ Lin y P’ Ra-ping, puedo garantizar que su historia de amor, tan cautivadora que no podrán dejar de leerla, les sacará la sonrisa más grande.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -354,8 +372,8 @@ const LIBROS = [
     "paginas": 348,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/332692/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Mientras los ricos resuelven sus problemas, los pobres aprovechan cualquier oportunidad para sobrevivir.\n\nUna chica llamada Marta busca trabajo para poder pagar el tratamiento de su madre. Una tarde, recibe un mensaje con una oferta de trabajo inusual. La familia Sangwit busca una empleada doméstica para Lady Isara Sangwit, la hija mayor y heredera de la empresa Infinity Life.\n\nA medida que avanza la historia, Marta se va acercando a Lady Isara y a su hermana, Lady Savika. Siente simpatía por ambas, pero solo ama de verdad a una de ellas. Por desgracia, el inicio de una relación prohibida no le aporta la alegría y la satisfacción deseadas. Marta descubre que Lady Isara está metida en un negocio inusual. Cuando se da cuenta de todos los riesgos y las acciones ilegales por parte de la mujer, se horroriza. Mientras tanto, Lady Savika intenta convencer a la joven de que debe analizar la situación con sensatez. Cada una de ellas empieza a reflexionar sobre su vida y a ver la situación desde un ángulo diferente. Una serie de acontecimientos inevitables acaba por cambiar la relación entre ellas, obligándolas a pensar en lo que realmente es más importante para ellas. Al final, tendrán que soportar una dura lección del destino. La pregunta será si el amor podrá ayudarlas en este camino o si solo empeorará las cosas.\n\nEl destino ha unido a personas de mundos completamente diferentes. ¿Su encuentro supondrá la salvación o la destrucción? Mientras el amor, como un veneno, se va infiltrando imperceptiblemente en sus corazones, la vida sigue lanzándoles nuevas pruebas.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -380,8 +398,8 @@ const LIBROS = [
     "paginas": 464,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/111709/Thumbnail/book_detail_large.gif?24",
     "sinopsis": "Su vida es un ajetreo constante; no tiene tiempo para preocuparse por el amor. ¿Por qué la gente de su entorno tiene que pensar que a él también le gusta ella? ¿De verdad le gustaría a alguien tan frío como él? Fíjate en su cara cuando se ven: parece más bien que no se caen nada bien.\n\nLa historia de amor de una guapa y fría doctora con una mujer que se le declara\n\nAkirabh, una joven empresaria que se enamoró de la guapa doctora desde el primer momento, lo que la llevó a intentar conquistarla con el té verde favorito de la doctora. Pero parece que la doctora Paniphak es más dura de lo que parecía. ¿Se cumplirá el deseo de amor de Akirabh?\n¿Y servirá de verdad el té verde para conquistar a la doctora tan fría?\nAnima a Akirabh en «Amor que une corazones».",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -406,8 +424,8 @@ const LIBROS = [
     "paginas": 715,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/364040/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "En esta novela, conocerás a Mae Kru Bulan , una mujer con características únicas y una belleza cautivadora que te hará sentir encantado, al igual que a la teniente Peem, quien nunca había creído en la magia. Una vez que la veneras como tu maestra, nunca olvidarás su nombre por el resto de tu vida.\nEspero sinceramente que este trabajo traiga felicidad a quienes lo lean, ya que he elaborado esta novela con la máxima dedicación. Prometo seguir mejorando en el futuro como una forma de agradecer a todos mis lectores. Me disculpo sinceramente si hay alguna deficiencia o error.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -419,8 +437,8 @@ const LIBROS = [
     "paginas": 270,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/332906/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Y a partir de este momento, la historia de confusión entre\n\"la adorable chica introvertida\" y \"la guapa chica extrovertida\"\ncomienza en la clase de trabajo en equipo durante todo el semestre.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -445,8 +463,8 @@ const LIBROS = [
     "paginas": 358,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/423525/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "«Antes no me querías, y ahora tampoco me dejas sentir nada. ¿Cuándo podré hacer lo que quiero?». La mirada de Sidney se volvió apagada. Se sentía demasiado cansada para seguir adelante. «Si no me quieres tanto, está bien. Me iré».\n\n\n\n\n«Cuando el amor aparece, se convierte en un hambre insaciable, porque no es tu corazón, sino la sangre que se ha despertado, y no solo devorará la carne, sino también el “alma” de todas las personas con las que te has vinculado».",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": true,
     "saga": "",
     "sagaNumero": null
@@ -458,8 +476,8 @@ const LIBROS = [
     "paginas": 606,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/315575/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "Veetara, la propietaria de una academia de clases particulares en Wongwian Yai, era el blanco principal de las bromas de Salee, una joven que siempre llevaba consigo un megáfono para dar clase y, lo que es más importante, para proclamar a los cuatro vientos su amor por su «Khun Jae», es decir, su jefa.\n\nNadie se tomaba en serio las travesuras juguetonas y molestas de Salee. Sin embargo, tampoco nadie sabía que, en realidad, Salee llevaba enamorada de su guapa, rica, talentosa y absolutamente fabulosa jefa desde que era solo una niña. Nadie podría haber predicho que, con el tiempo, Veetara, que escuchaba esas ruidosas declaraciones de amor todos los días, acabaría echando de menos esas alegres proclamaciones de su persistente admiradora.\n\n¡Excepto la adivina, que lo sabía todo! «¡Veo que tu jefe va a ser tu marido!», fue la predicción de una famosa adivina en el muelle de Khlong San.\n\nQuienes no se lo creyeran, no tenían por qué hacerlo. Salee lo creía de todo corazón. Se dedicó a anunciárselo a todo el mundo en la oficina, lo que hacía que sus compañeros apretaran los puños de frustración.\n\n«Muy pronto seré la mujer del jefe. Así que más os vale empezar a tratarme bien».",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -471,8 +489,8 @@ const LIBROS = [
     "paginas": 645,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/318421/Thumbnail/book_detail_large.gif?6",
     "sinopsis": "«Si tuviera la oportunidad de volver al instituto, sería genial», porque esa fue la mejor época de su vida, aunque también la que más le hace lamentarse. Praewproud tiene cosas que quiere arreglar... sobre todo lo que pasó entre ella y aquella chica.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -484,8 +502,8 @@ const LIBROS = [
     "paginas": 373,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/191128/Thumbnail/book_detail_large.gif?3",
     "sinopsis": "El señor Sam de los rumores no se parece mucho al de verdad. Ella parece… un poco coqueta, ¿no?\n.\n.\nDos grandes familias muy conocidas están a punto de dar una buena noticia.\n\nEste rumor tan extendido parece bastante cierto.\n\nPorque se han filtrado unas fotos en las que ambas familias firman un acuerdo de alianza.\n\nMuchos sienten lástima por la joven de la familia Zhang.\n\nDicen que casarse con el señor San no es diferente a ser un cisne con el ala rota.\n\n\n\n«¿Qué opinas de los rumores sobre ti antes de casarte con la hija de la familia Zhang?»\n«No tengo respuesta».\n«¿Eso significa que la señorita Zhang será una cisne con el ala rota?»\n«¿Acaso tengo un bastón?»",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -497,8 +515,8 @@ const LIBROS = [
     "paginas": 262,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/431735/Thumbnail/book_detail_large.gif?2",
     "sinopsis": "Huyendo de un matrimonio forzado y de la muerte de su hermano, Malai escapa a Tailandia y miente diciendo que está saliendo con P.K., una temida jefa de la mafia.\n\nNunca espera que P.K. sea en realidad una reina oculta… ni que termine enamorándose de ella.",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
@@ -510,8 +528,8 @@ const LIBROS = [
     "paginas": 839,
     "portada": "https://m.media-amazon.com/images/I/81at7wgHrqL._SY342_.jpg",
     "sinopsis": "Zhaojun era una estudiante universitaria más durante el día, pero por la noche, se adentra en un mundo secreto de encuentros de alto riesgo y deseos ocultos. Compaginando los estudios, sus amigas y la presión de su trabajo poco convencional, jamás imaginó que una reunión rutinaria se convertiría en un momento que podría cambiarlo todo.\nCuando una misteriosa clienta, Namnueng, se cruzó en su camino, Zhaojun tuvo que enfrentarse a la tensión entre el deseo, el peligro y las decisiones que definirían su verdadera identidad. Si a esto le agregabamos amigas que se preocupan demasiado, profesores que saben demasiado y secretos que se resisten a permanecer enterrados, de repente, cada decisión comenzó a tener un peso que iba mucho más allá del dinero.\n¿Podrá sobrevivir a la emoción y el riesgo de un mundo donde las apariencias engañan y los límites se desdibujan, o un solo encuentro cambiará su vida para siempre?",
-    "cogida": false,
-    "cogidaPor": "",
+    "escogida": false,
+    "escogidaPor": "",
     "serie": false,
     "saga": "",
     "sagaNumero": null
