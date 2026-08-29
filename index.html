@@ -518,6 +518,21 @@ h1{
   margin-top:6px;
 }
 .boton-principal:hover{background:var(--verde2)}
+.boton-secundario{
+  padding:11px 14px;
+  background:transparent;
+  color:var(--sello-rojo);
+  border:1px solid var(--sello-rojo);
+  border-radius:2px;
+  font-family:var(--font-stamp);
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  margin-top:6px;
+}
+.boton-secundario:hover{background:rgba(163,57,44,0.08)}
+.acciones-progreso .boton-principal{width:auto;flex:1 1 auto}
 .auth-error{
   font-size:12px;
   color:var(--sello-rojo);
@@ -1038,7 +1053,10 @@ async function renderPanelProgreso(){
         </div>
       </div>
       <div class="campo-porcentaje-calculado" id="porcentajeCalculado-${fila.libro_id}" style="font-size:12px;color:var(--tinta-suave);margin-bottom:12px"></div>
-      <button class="boton-principal" data-libro="${fila.libro_id}" onclick="guardarProgreso('${fila.libro_id}')">Guardar progreso</button>
+      <div class="acciones-progreso" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <button class="boton-principal" data-libro="${fila.libro_id}" onclick="guardarProgreso('${fila.libro_id}')">Guardar progreso</button>
+        <button class="boton-secundario" data-libro="${fila.libro_id}" onclick="dejarLibroLibre('${fila.libro_id}')">Dejar esta novela libre</button>
+      </div>
       <div class="auth-ok" id="guardadoOk-${fila.libro_id}"></div>
     </div>
   `;}).join('');
@@ -1089,6 +1107,31 @@ async function guardarProgreso(libroId){
   okEl.textContent = '✓ Guardado';
   await cargarProgreso();
   render();
+}
+
+// Deja libre una novela que la propia persona logueada había elegido.
+// Va siempre atada a su email (escogida_por_email), así que nunca puede
+// tocar la novela de otra persona, aunque conozca el libro_id.
+async function dejarLibroLibre(libroId){
+  if(!sesionActual) return;
+  const libro = LIBROS.find(l => l.id === libroId);
+  const titulo = libro ? libro.titulo : libroId;
+  if(!confirm(`¿Dejar «${titulo}» libre otra vez? Se borrará tu progreso guardado en esta novela.`)) return;
+
+  const miEmail = sesionActual.user.email;
+  const { error } = await supa
+    .from('novelas_traducir')
+    .delete()
+    .eq('libro_id', libroId)
+    .eq('escogida_por_email', miEmail);
+
+  if(error){
+    alert('No se pudo dejarla libre: ' + error.message);
+    return;
+  }
+  await cargarProgreso();
+  render();
+  await renderPanelProgreso();
 }
 
 /* ============================================================
