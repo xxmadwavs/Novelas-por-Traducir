@@ -448,6 +448,29 @@ function escapeHtml(str){
   return div.innerHTML;
 }
 
+// Genera un id corto y estable (slug) a partir del título.
+// Este id es el que vincula cada novela con su fila de progreso en Supabase,
+// así que una vez creado no debe cambiar.
+function slugify(str){
+  return (str || '')
+    .toString()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita acentos
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function idUnico(base, indiceAIgnorar){
+  let id = base || 'novela';
+  let n = 2;
+  const enUso = i => novelas.some((nv, j) => j !== indiceAIgnorar && nv.id === i);
+  while(enUso(id)){
+    id = `${base || 'novela'}-${n}`;
+    n++;
+  }
+  return id;
+}
+
 function coincideBusquedaLista(n, texto){
   if(!texto) return true;
   const t = texto.toLowerCase();
@@ -561,7 +584,14 @@ document.getElementById('btn-guardar').addEventListener('click', ()=>{
     alert('Ponle un título a la novela antes de guardarla.');
     return;
   }
+  // Si estamos editando, conservamos el id que ya tenía la novela
+  // (no debe cambiar, porque Supabase lo usa para vincular el progreso).
+  // Si es una novela nueva, generamos uno a partir del título.
+  const idExistente = editandoIndex !== null ? novelas[editandoIndex].id : null;
+  const id = idExistente || idUnico(slugify(titulo), editandoIndex);
+
   const datosNovela = {
+    id,
     titulo,
     autora: document.getElementById('f-autora').value.trim(),
     anio: Number(document.getElementById('f-anio').value) || null,
@@ -605,7 +635,17 @@ async function importarArchivo(input){
     const arrayTexto = texto.slice(inicio, fin+1);
     const importadas = new Function('return ' + arrayTexto)();
     if(!Array.isArray(importadas)) throw new Error('no es una lista');
-    novelas = importadas.map(n=>({
+    const idsUsados = new Set();
+    novelas = importadas.map(n=>{
+      let id = n.id || slugify(n.titulo) || 'novela';
+      let base = id, contador = 2;
+      while(idsUsados.has(id)){
+        id = `${base}-${contador}`;
+        contador++;
+      }
+      idsUsados.add(id);
+      return {
+      id,
       titulo: n.titulo || '',
       autora: n.autora || '',
       anio: n.anio || null,
@@ -618,7 +658,8 @@ async function importarArchivo(input){
       saga: n.saga || '',
       sagaNumero: n.sagaNumero || null,
       nueva: !!n.nueva
-    }));
+      };
+    });
     guardarLocal();
     renderLista();
     alert(`Importadas ${novelas.length} novelas ✓`);
@@ -635,6 +676,8 @@ function generarCodigo(){
    Puedes seguir editándolo a mano o volver a generarlo desde admin.html.
 
    Campos:
+     id (identificador único, NO cambiar una vez creado — vincula esta
+       novela con su fila de progreso en Supabase),
      titulo, autora, anio, paginas, portada, sinopsis,
      escogida (true/false), escogidaPor (opcional),
      serie (true/false), saga (opcional), sagaNumero (opcional),

@@ -3,6 +3,8 @@
    Puedes seguir editándolo a mano o volver a generarlo desde admin.html.
 
    Campos:
+     id (identificador único, NO cambiar una vez creado — se usa para
+       vincular esta novela con su fila de progreso en Supabase),
      titulo, autora, anio, paginas, portada, sinopsis,
      escogida (true/false), escogidaPor (opcional),
      serie (true/false), saga (opcional), sagaNumero (opcional),
@@ -14,6 +16,7 @@
 
 const LIBROS = [
   {
+    "id": "clock",
     "titulo": "Clock",
     "autora": "ChaoPlanoy",
     "anio": 2026,
@@ -28,6 +31,7 @@ const LIBROS = [
     "nueva": true
   },
   {
+    "id": "ferris-wheel",
     "titulo": "Ferris Wheel",
     "autora": "reallyb",
     "anio": 2025,
@@ -42,6 +46,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "ava-in-march",
     "titulo": "Ava in March",
     "autora": "reallyb",
     "anio": 2026,
@@ -56,6 +61,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "merry-go-round",
     "titulo": "Merry-Go-Round",
     "autora": "reallyb",
     "anio": 2025,
@@ -70,6 +76,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "be-my-boo",
     "titulo": "Be my Boo!",
     "autora": "Khun Phuying",
     "anio": 2023,
@@ -84,6 +91,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "because-of-love-vol-1",
     "titulo": "Because of Love vol 1",
     "autora": "MeeNam",
     "anio": 2015,
@@ -98,6 +106,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "because-of-love-vol-2",
     "titulo": "Because of Love vol 2",
     "autora": "MeeNam",
     "anio": 2018,
@@ -112,6 +121,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "you",
     "titulo": "YOU",
     "autora": "MeeNam",
     "anio": 2020,
@@ -126,6 +136,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "reverse-4-you",
     "titulo": "Reverse 4 You",
     "autora": "Zezeho",
     "anio": 2024,
@@ -140,6 +151,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "bad-sugar",
     "titulo": "Bad Sugar",
     "autora": "Zezeho",
     "anio": 2018,
@@ -154,6 +166,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "mistress-g",
     "titulo": "MISTRESS G",
     "autora": "Zezeho",
     "anio": 2026,
@@ -168,6 +181,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "the-wathinwanits",
     "titulo": "The Wathinwanits",
     "autora": "Salmon",
     "anio": 2025,
@@ -182,6 +196,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "mutelu-u-me",
     "titulo": "Mutelu U & Me",
     "autora": "Salmon",
     "anio": 2026,
@@ -196,6 +211,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "my-wife",
     "titulo": "My Wife",
     "autora": "Salmon",
     "anio": 2026,
@@ -210,6 +226,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "sugar-mommy",
     "titulo": "Sugar Mommy",
     "autora": "Salmon",
     "anio": 2026,
@@ -224,6 +241,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "villain-star",
     "titulo": "VILLAIN STAR",
     "autora": "Salmon",
     "anio": 2025,
@@ -238,6 +256,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "180-days-love-mission",
     "titulo": "180 Days Love Mission",
     "autora": "Loveagain",
     "anio": 2020,
@@ -252,6 +271,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "once-again",
     "titulo": "Once Again",
     "autora": "Madam Fer",
     "anio": 2026,
@@ -266,6 +286,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "chorfah-darin",
     "titulo": "Chorfah Darin",
     "autora": "Jane.Stella",
     "anio": 2026,
@@ -280,6 +301,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "remain-vol-02",
     "titulo": "Remain Vol.02",
     "autora": "Flower of Memory",
     "anio": 2025,
@@ -294,6 +316,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "uncertainty",
     "titulo": "Uncertainty",
     "autora": "Flower of Memory",
     "anio": 2025,
@@ -308,6 +331,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "hidden-heart-concealed-love",
     "titulo": "Hidden Heart (Concealed Love)",
     "autora": "Flower of Memory",
     "anio": 2026,
@@ -322,6 +346,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "obsessed",
     "titulo": "Obsessed",
     "autora": "ChaoPlanoy",
     "anio": 2022,
@@ -336,6 +361,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "no5",
     "titulo": "No5",
     "autora": "ChaoPlanoy",
     "anio": 2020,
@@ -350,6 +376,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "sister-baby-i-love-you",
     "titulo": "Sister: Baby, I Love You",
     "autora": "ChaoPlanoy",
     "anio": 2025,
@@ -364,6 +391,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "dna",
     "titulo": "DNA",
     "autora": "ChaoPlanoy",
     "anio": 2026,
@@ -378,6 +406,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "charming-lady",
     "titulo": "Charming Lady",
     "autora": "3dokjix",
     "anio": 2026,
@@ -392,6 +421,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "ashes-of-our-hearts",
     "titulo": "Ashes of our hearts",
     "autora": "Kasika Kattiya",
     "anio": 2024,
@@ -406,6 +436,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "bloody-mary",
     "titulo": "Bloody Mary",
     "autora": "Freaky",
     "anio": 2023,
@@ -420,6 +451,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "chain",
     "titulo": "CHAIN",
     "autora": "Reverse",
     "anio": 2020,
@@ -434,6 +466,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "sweet-as-a-breeze-deadly-as-love",
     "titulo": "Sweet as a Breeze, Deadly as Love",
     "autora": "Lambo",
     "anio": 2026,
@@ -448,6 +481,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "formidable-eyes-khom-khlang",
     "titulo": "FORMIDABLE EYES (Khom Khlang)",
     "autora": "Luxurious.W",
     "anio": 2025,
@@ -462,6 +496,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "untrovert",
     "titulo": "UNTROVERT",
     "autora": "Guy Suwannaroj & Lita P",
     "anio": 2024,
@@ -476,13 +511,14 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "beloved-passion",
     "titulo": "Beloved Passion",
     "autora": "MapleTree",
     "anio": 2026,
     "paginas": 507,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/444870/Thumbnail/book_detail_large.gif?8",
     "sinopsis": "Soy BB, Paphawarin.\n\nSuperar cada día siendo yo misma no es nada fácil. Mientras me abro camino en la caótica vida de una actriz, debo cuidar constantemente mi imagen, medir mis palabras y asegurarme de que cada postura y cada gesto parezcan elegantes e impecables con cada respiración que tomo. Pero entonces, de la nada, me encontré desafiando a cierta persona.\n\nSe llama Love, Lillada, mi compañera de clase increíblemente fría que prefiere mantenerse al margen. En realidad, es la hija de un multimillonario inmensamente poderoso. Como mi torpe mano se movió más rápido que mi cerebro, firmé sin querer el contrato que me ofreció antes incluso de leer los detalles con atención. En consecuencia, pasé a ser suya de forma implícita, atada por el acuerdo «Pasión Amada», lo que me convirtió en alguien comprometida sin posibilidad de escapar.\n\nA pesar de mi aversión a que me obliguen a nada, resulta que soy yo quien ansía ser de ella. ¿Qué es este anhelo y deseo infinitos por ella? Me he enamorado perdidamente de ella. No puedo vivir sin ella, como si ella fuera precisamente eso, lo que se llama una pasión desenfrenada.",
-    "escogida": false,
+    "escogida": true,
     "escogidaPor": "admin",
     "serie": false,
     "saga": "",
@@ -490,6 +526,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "the-hidden-blood",
     "titulo": "THE HIDDEN BLOOD",
     "autora": "Guy Suwannaroj & Lita P",
     "anio": 2026,
@@ -504,6 +541,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "adore-khun-jae-like-crazy",
     "titulo": "Adore Khun Jae Like Crazy!",
     "autora": "THEK34",
     "anio": 2024,
@@ -518,6 +556,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "back-to-you",
     "titulo": "BACK TO YOU",
     "autora": "THEK34",
     "anio": 2024,
@@ -532,6 +571,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "like-wife-khun-sam",
     "titulo": "Like Wife Khun Sam",
     "autora": "Chao Fa Phraya Fon",
     "anio": 2022,
@@ -546,6 +586,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "queen-without-a-name-flame-garland",
     "titulo": "Queen Without a Name: Flame Garland",
     "autora": "SuketaSiri",
     "anio": 2026,
@@ -560,6 +601,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "by-your-side",
     "titulo": "By Your Side",
     "autora": "Ma-Bung",
     "anio": 2026,
@@ -574,20 +616,22 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "laundry-love-chaos",
     "titulo": "Laundry Love Chaos",
     "autora": "zonlich",
     "anio": 2021,
     "paginas": 486,
     "portada": "https://cdn-local.mebmarket.com/meb/server1/163914/Thumbnail/book_detail_large.gif?14",
     "sinopsis": "«¿Qué parte de la ropa interior de la clienta se ha dañado, por favor?»\n(Son los calzoncillos.)\n¿En serio? ¿De verdad hay gente en este mundo que plancha los calzoncillos?\nAiron se quedó atónita ante la extraña queja de la joven clienta y tenía que ver su cara para saber qué aspecto tenía.",
-    "escogida": false,
-    "escogidaPor": "xxmadwavs",
+    "escogida": true,
+    "escogidaPor": "admin",
     "serie": false,
     "saga": "",
     "sagaNumero": null,
     "nueva": false
   },
   {
+    "id": "somewhere-somehow-vol-1",
     "titulo": "Somewhere Somehow vol. 1",
     "autora": "MonMaw",
     "anio": 2025,
@@ -602,6 +646,7 @@ const LIBROS = [
     "nueva": false
   },
   {
+    "id": "somewhere-somehow-vol-2",
     "titulo": "Somewhere Somehow Vol.2",
     "autora": "MonMaw",
     "anio": 2025,
