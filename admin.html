@@ -164,6 +164,20 @@ main{
 .acciones-form{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap}
 #importArchivo{display:none}
 
+/* buscador de la lista */
+.buscador-lista{margin-bottom:16px}
+.buscador-lista input{
+  width:100%;
+  background:var(--verde);
+  border:1px solid rgba(169,132,63,0.35);
+  color:var(--kraft);
+  font-family:var(--font-body);
+  font-size:13px;
+  padding:10px 12px;
+  border-radius:2px;
+}
+.buscador-lista input::placeholder{color:var(--tinta-suave);opacity:0.7}
+
 /* lista de novelas cargadas */
 .lista{display:flex;flex-direction:column;gap:12px}
 .fila-novela{
@@ -195,7 +209,7 @@ main{
   border-radius:2px;
 }
 .fila-estado.libre{background:rgba(46,83,89,0.14);color:var(--sello-azul)}
-.fila-estado.cogida{background:rgba(163,57,44,0.14);color:var(--sello-rojo)}
+.fila-estado.escogida{background:rgba(163,57,44,0.14);color:var(--sello-rojo)}
 .fila-botones{display:flex;flex-direction:column;gap:6px;flex-shrink:0}
 .vacio-lista{
   font-family:var(--font-stamp);
@@ -279,11 +293,11 @@ textarea#salida{
       <textarea id="f-sinopsis"></textarea>
     </div>
     <div class="campo">
-      <label class="check"><input type="checkbox" id="f-cogida"> Ya la ha cogido alguien para traducir</label>
+      <label class="check"><input type="checkbox" id="f-escogida"> Ya la ha escogido alguien para traducir</label>
     </div>
-    <div class="campo" id="campo-cogidapor" style="display:none">
-      <label for="f-cogidapor">¿Quién la ha cogido? (opcional)</label>
-      <input type="text" id="f-cogidapor">
+    <div class="campo" id="campo-escogidapor" style="display:none">
+      <label for="f-escogidapor">¿Quién la ha escogido? (opcional)</label>
+      <input type="text" id="f-escogidapor">
     </div>
     <div class="campo">
       <label class="check"><input type="checkbox" id="f-serie"> Tiene serie / adaptación</label>
@@ -305,7 +319,10 @@ textarea#salida{
   </section>
 
   <section class="panel">
-    <h2>3 · Novelas en la lista (<span id="conteo">0</span>)</h2>
+    <h2>3 · Novelas en la lista (<span id="conteo">0</span><span id="conteo-filtro"></span>)</h2>
+    <div class="buscador-lista">
+      <input type="text" id="buscar-lista" placeholder="Buscar por título o autora…">
+    </div>
     <div class="lista" id="lista"></div>
   </section>
 
@@ -327,16 +344,24 @@ textarea#salida{
 const CLAVE_LOCAL = 'novelas_admin_borrador';
 let novelas = JSON.parse(localStorage.getItem(CLAVE_LOCAL) || '[]');
 let editandoIndex = null;
+let textoBusquedaLista = '';
 
 const lista = document.getElementById('lista');
 const conteo = document.getElementById('conteo');
+const conteoFiltro = document.getElementById('conteo-filtro');
 const salida = document.getElementById('salida');
 const aviso = document.getElementById('aviso');
+const buscarLista = document.getElementById('buscar-lista');
 
-const campoCogida = document.getElementById('f-cogida');
-const campoCogidaPor = document.getElementById('campo-cogidapor');
-campoCogida.addEventListener('change', ()=>{
-  campoCogidaPor.style.display = campoCogida.checked ? 'block' : 'none';
+buscarLista.addEventListener('input', e=>{
+  textoBusquedaLista = e.target.value;
+  renderLista();
+});
+
+const campoEscogida = document.getElementById('f-escogida');
+const campoEscogidaPor = document.getElementById('campo-escogidapor');
+campoEscogida.addEventListener('change', ()=>{
+  campoEscogidaPor.style.display = campoEscogida.checked ? 'block' : 'none';
 });
 
 function guardarLocal(){
@@ -349,24 +374,41 @@ function escapeHtml(str){
   return div.innerHTML;
 }
 
+function coincideBusquedaLista(n, texto){
+  if(!texto) return true;
+  const t = texto.toLowerCase();
+  return (n.titulo||'').toLowerCase().includes(t) || (n.autora||'').toLowerCase().includes(t);
+}
+
 function renderLista(){
   conteo.textContent = novelas.length;
   if(novelas.length === 0){
     lista.innerHTML = '<div class="vacio-lista">Todavía no hay ninguna novela en la lista.</div>';
     return;
   }
-  lista.innerHTML = novelas.map((n, i)=>`
+  const filtradas = novelas
+    .map((n, i)=>({n, i}))
+    .filter(({n})=>coincideBusquedaLista(n, textoBusquedaLista));
+
+  conteoFiltro.textContent = textoBusquedaLista ? ` · ${filtradas.length} coincide${filtradas.length===1?'':'n'}` : '';
+
+  if(filtradas.length === 0){
+    lista.innerHTML = '<div class="vacio-lista">Ninguna novela coincide con la búsqueda.</div>';
+    return;
+  }
+
+  lista.innerHTML = filtradas.map(({n, i})=>`
     <div class="fila-novela">
       <img src="${n.portada || ''}" alt="" onerror="this.style.visibility='hidden'">
       <div class="fila-info">
         <div class="fila-titulo">${escapeHtml(n.titulo || '(sin título)')}</div>
         <div class="fila-meta">${escapeHtml(n.autora||'')} · ${n.anio||'—'} · ${n.paginas||'—'} pág.</div>
-        <span class="fila-estado ${n.cogida?'cogida':'libre'}">${n.cogida ? ('Cogida' + (n.cogidaPor?(' · '+escapeHtml(n.cogidaPor)):'')) : 'Libre'}</span>
+        <span class="fila-estado ${n.escogida?'escogida':'libre'}">${n.escogida ? ('Escogida' + (n.escogidaPor?(' · '+escapeHtml(n.escogidaPor)):'')) : 'Libre'}</span>
         ${n.serie ? '<span class="fila-estado libre" style="margin-left:6px;color:var(--latón-claro);background:transparent;border:1px solid var(--latón)">Serie</span>' : ''}
         ${n.saga ? `<div class="fila-meta" style="margin-top:4px;font-style:italic">${escapeHtml(n.saga)}${n.sagaNumero?' · #'+n.sagaNumero:''}</div>` : ''}
       </div>
       <div class="fila-botones">
-        <button class="btn secundario pequeño" onclick="alternarCogida(${i})">${n.cogida?'Marcar libre':'Marcar cogida'}</button>
+        <button class="btn secundario pequeño" onclick="alternarEscogida(${i})">${n.escogida?'Marcar libre':'Marcar escogida'}</button>
         <button class="btn secundario pequeño" onclick="editarNovela(${i})">Editar</button>
         <button class="btn peligro pequeño" onclick="borrarNovela(${i})">Borrar</button>
       </div>
@@ -374,8 +416,8 @@ function renderLista(){
   `).join('');
 }
 
-function alternarCogida(i){
-  novelas[i].cogida = !novelas[i].cogida;
+function alternarEscogida(i){
+  novelas[i].escogida = !novelas[i].escogida;
   guardarLocal();
   renderLista();
 }
@@ -388,9 +430,9 @@ function editarNovela(i){
   document.getElementById('f-paginas').value = n.paginas || '';
   document.getElementById('f-portada').value = n.portada || '';
   document.getElementById('f-sinopsis').value = n.sinopsis || '';
-  campoCogida.checked = !!n.cogida;
-  campoCogidaPor.style.display = n.cogida ? 'block' : 'none';
-  document.getElementById('f-cogidapor').value = n.cogidaPor || '';
+  campoEscogida.checked = !!n.escogida;
+  campoEscogidaPor.style.display = n.escogida ? 'block' : 'none';
+  document.getElementById('f-escogidapor').value = n.escogidaPor || '';
   document.getElementById('f-serie').checked = !!n.serie;
   document.getElementById('f-saga').value = n.saga || '';
   document.getElementById('f-saganumero').value = n.sagaNumero || '';
@@ -415,9 +457,9 @@ function limpiarFormulario(){
   document.getElementById('f-paginas').value = '';
   document.getElementById('f-portada').value = '';
   document.getElementById('f-sinopsis').value = '';
-  campoCogida.checked = false;
-  campoCogidaPor.style.display = 'none';
-  document.getElementById('f-cogidapor').value = '';
+  campoEscogida.checked = false;
+  campoEscogidaPor.style.display = 'none';
+  document.getElementById('f-escogidapor').value = '';
   document.getElementById('f-serie').checked = false;
   document.getElementById('f-saga').value = '';
   document.getElementById('f-saganumero').value = '';
@@ -442,8 +484,8 @@ document.getElementById('btn-guardar').addEventListener('click', ()=>{
     paginas: Number(document.getElementById('f-paginas').value) || null,
     portada: document.getElementById('f-portada').value.trim(),
     sinopsis: document.getElementById('f-sinopsis').value.trim(),
-    cogida: campoCogida.checked,
-    cogidaPor: document.getElementById('f-cogidapor').value.trim(),
+    escogida: campoEscogida.checked,
+    escogidaPor: document.getElementById('f-escogidapor').value.trim(),
     serie: document.getElementById('f-serie').checked,
     saga: document.getElementById('f-saga').value.trim(),
     sagaNumero: Number(document.getElementById('f-saganumero').value) || null
@@ -483,8 +525,8 @@ async function importarArchivo(input){
       paginas: n.paginas || null,
       portada: n.portada || '',
       sinopsis: n.sinopsis || '',
-      cogida: !!n.cogida,
-      cogidaPor: n.cogidaPor || '',
+      escogida: !!n.escogida,
+      escogidaPor: n.escogidaPor || '',
       serie: !!n.serie,
       saga: n.saga || '',
       sagaNumero: n.sagaNumero || null
@@ -506,7 +548,7 @@ function generarCodigo(){
 
    Campos:
      titulo, autora, anio, paginas, portada, sinopsis,
-     cogida (true/false), cogidaPor (opcional),
+     escogida (true/false), escogidaPor (opcional),
      serie (true/false), saga (opcional), sagaNumero (opcional)
    ============================================================ */
 

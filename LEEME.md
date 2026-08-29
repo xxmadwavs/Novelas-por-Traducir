@@ -2,7 +2,7 @@
 
 Web estática de 2 archivos, sin base de datos. Ideal para GitHub Pages.
 
-Sirve para coordinar traducciones: un catálogo de novelas donde cada ficha dice si está libre o si alguien ya la ha cogido, para que nadie duplique el trabajo.
+Sirve para coordinar traducciones: un catálogo de novelas donde cada ficha dice si está libre o si alguien ya la ha escogido, para que nadie duplique el trabajo.
 
 ## Archivos
 
@@ -14,7 +14,7 @@ Sirve para coordinar traducciones: un catálogo de novelas donde cada ficha dice
 
 1. Abre `admin.html` en el navegador (haciendo doble clic, no hace falta subirlo a ningún sitio).
 2. Si ya tienes novelas, pega el contenido actual de `books-data.js` en el paso 1 y pulsa «Importar lista».
-3. Añade novelas nuevas con el formulario, o edita/marca cogida-libre las que ya tengas en la lista.
+3. Añade novelas nuevas con el formulario, o edita/marca escogida-libre las que ya tengas en la lista.
 4. Todo lo que hagas se guarda automáticamente en el navegador mientras trabajas, así que puedes cerrar y volver sin perder nada.
 5. Cuando esté lista, pulsa «Descargar books-data.js» (o «Copiar código») y sustituye el archivo en tu carpeta del repositorio.
 6. Sube el cambio a GitHub como siempre.
@@ -29,7 +29,7 @@ Sirve para coordinar traducciones: un catálogo de novelas donde cada ficha dice
 
 Abre `books-data.js`, copia un bloque `{ ... }` existente y pégalo dentro de los corchetes `[ ]`, rellenando los campos. Las instrucciones están en comentarios al principio del archivo.
 
-Para marcar una novela como cogida o libre, solo cambia `cogida: true` ↔ `cogida: false` y guarda. Al subir el cambio a GitHub, la web se actualiza sola.
+Para marcar una novela como escogida o libre, solo cambia `escogida: true` ↔ `escogida: false` y guarda. Al subir el cambio a GitHub, la web se actualiza sola.
 
 ## Portadas
 

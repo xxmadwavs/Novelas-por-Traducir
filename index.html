@@ -265,7 +265,7 @@ h1{
   top:14px;right:10px;
   transform:rotate(9deg);
 }
-.sello.cogida{
+.sello.escogida{
   color:var(--sello-rojo);
   top:14px;right:6px;
   transform:rotate(-11deg);
@@ -400,7 +400,7 @@ h1{
   border-radius:2px;
 }
 .modal-estado.libre{background:rgba(46,83,89,0.14);color:var(--sello-azul)}
-.modal-estado.cogida{background:rgba(163,57,44,0.14);color:var(--sello-rojo)}
+.modal-estado.escogida{background:rgba(163,57,44,0.14);color:var(--sello-rojo)}
 .modal-sinopsis{
   font-size:13px;
   line-height:1.75;
@@ -427,7 +427,7 @@ h1{
     <div class="eyebrow">Catálogo de fichas · coordinación de traducciones</div>
     <h1>Novelas por Traducir</h1>
   </div>
-  <p class="subtitulo">Las novelas pendientes de traducir. Cada ficha dice si está libre o si alguien ya la ha cogido, para no duplicar el trabajo.</p>
+  <p class="subtitulo">Las novelas pendientes de traducir. Cada ficha dice si está libre o si alguien ya la ha escogido, para no duplicar el trabajo.</p>
 </header>
 
 <div class="controles">
@@ -437,7 +437,7 @@ h1{
   <div class="tabs">
     <button class="tab activo" data-filtro="todos">Todas</button>
     <button class="tab" data-filtro="libre">Libres</button>
-    <button class="tab" data-filtro="cogida">Cogidas</button>
+    <button class="tab" data-filtro="escogida">Escogidas</button>
   </div>
 </div>
 <p class="contador" id="contador"></p>
@@ -466,8 +466,8 @@ function coincideBusqueda(libro, texto){
 
 function render(){
   const filtrados = LIBROS.filter(libro=>{
-    if(filtroActivo === 'libre' && libro.cogida) return false;
-    if(filtroActivo === 'cogida' && !libro.cogida) return false;
+    if(filtroActivo === 'libre' && libro.escogida) return false;
+    if(filtroActivo === 'escogida' && !libro.escogida) return false;
     return coincideBusqueda(libro, textoBusqueda);
   });
 
@@ -483,7 +483,7 @@ function render(){
   rejilla.innerHTML = filtrados.map((libro)=>`
     <article class="ficha" tabindex="0" data-idx="${LIBROS.indexOf(libro)}">
       <div class="perforacion"></div>
-      <div class="sello ${libro.cogida?'cogida':'libre'}">${libro.cogida?'Cogida':'Libre'}</div>
+      <div class="sello ${libro.escogida?'escogida':'libre'}">${libro.escogida?'Escogida':'Libre'}</div>
       ${libro.serie ? '<div class="etiqueta-serie">Tiene serie</div>' : ''}
       <div class="portada-wrap">
         <div class="cinta"></div>
@@ -516,8 +516,8 @@ function abrirModal(libro){
         <div class="modal-autora">${escapeHtml(libro.autora)}</div>
         <div class="modal-meta"><span>${libro.anio}</span><span>${libro.paginas} páginas</span>${libro.serie ? '<span>Tiene serie</span>' : ''}</div>
         ${libro.saga ? `<div class="modal-meta" style="margin-top:-6px"><span>Saga: ${escapeHtml(libro.saga)}${libro.sagaNumero ? ' #' + libro.sagaNumero : ''}</span></div>` : ''}
-        <span class="modal-estado ${libro.cogida?'cogida':'libre'}">
-          ${libro.cogida ? ('Cogida' + (libro.cogidaPor ? ' por ' + escapeHtml(libro.cogidaPor) : '')) : 'Libre para traducir'}
+        <span class="modal-estado ${libro.escogida?'escogida':'libre'}">
+          ${libro.escogida ? ('Escogida' + (libro.escogidaPor ? ' por ' + escapeHtml(libro.escogidaPor) : '')) : 'Libre para traducir'}
         </span>
       </div>
     </div>
