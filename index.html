@@ -670,14 +670,22 @@ function estadoDe(libro){
   };
 }
 
+// Calcula el % a partir de los capítulos cuando no hay progreso_porcentaje
+// guardado directamente (p.ej. si solo se rellenaron capítulos desde index).
+function porcentajeDe(info){
+  if(info.progreso_porcentaje !== null && info.progreso_porcentaje !== undefined){
+    return info.progreso_porcentaje;
+  }
+  if(info.capitulos_total && info.capitulos_total > 0 && info.capitulo_actual !== null && info.capitulo_actual !== undefined){
+    return Math.max(0, Math.min(100, Math.round((info.capitulo_actual / info.capitulos_total) * 100)));
+  }
+  return null;
+}
+
 function chipProgreso(info){
   if(!info.escogida) return '';
-  let extra = '';
-  if(info.progreso_porcentaje !== null && info.progreso_porcentaje !== undefined){
-    extra = ` · ${info.progreso_porcentaje}%`;
-  } else if(info.capitulo_actual){
-    extra = ` · cap. ${info.capitulo_actual}${info.capitulos_total ? '/' + info.capitulos_total : ''}`;
-  }
+  const pct = porcentajeDe(info);
+  const extra = pct !== null ? ` · ${pct}%` : '';
   return `<span class="etiqueta-estado ${info.estado}">${ESTADOS[info.estado] || 'Escogida'}${extra}</span>`;
 }
 
@@ -733,6 +741,7 @@ function render(){
 
 function abrirModal(libro){
   const info = estadoDe(libro);
+  const porcentajeModal = porcentajeDe(info);
   modal.innerHTML = `
     <button class="cerrar" aria-label="Cerrar">✕</button>
     <div class="modal-top">
@@ -745,14 +754,11 @@ function abrirModal(libro){
         <span class="modal-estado ${info.escogida?'escogida':'libre'}">
           ${info.escogida ? (escapeHtml(ESTADOS[info.estado] || 'Escogida') + (info.escogidaPor ? ' por ' + escapeHtml(info.escogidaPor) : '')) : 'Libre para traducir'}
         </span>
-        ${info.escogida && info.progreso_porcentaje !== null && info.progreso_porcentaje !== undefined ? `
+        ${info.escogida && porcentajeModal !== null ? `
           <div class="barra-porcentaje" style="margin-top:10px;max-width:220px">
-            <div class="barra-porcentaje-relleno" style="width:${info.progreso_porcentaje}%"></div>
+            <div class="barra-porcentaje-relleno" style="width:${porcentajeModal}%"></div>
           </div>
-          <div style="font-size:11px;color:var(--tinta-suave);margin-top:4px">${info.progreso_porcentaje}% traducido</div>
-        ` : ''}
-        ${info.escogida && !info.progreso_porcentaje && info.capitulo_actual ? `
-          <div style="font-size:11px;color:var(--tinta-suave);margin-top:6px">Capítulo ${info.capitulo_actual}${info.capitulos_total ? ' de ' + info.capitulos_total : ''}</div>
+          <div style="font-size:11px;color:var(--tinta-suave);margin-top:4px">${porcentajeModal}% traducido</div>
         ` : ''}
       </div>
     </div>
