@@ -16,6 +16,21 @@
 
 const LIBROS = [
   {
+    "id": "if",
+    "titulo": "If",
+    "autora": "ChaoPlanoy",
+    "anio": 2025,
+    "paginas": 328,
+    "portada": "https://cdn-local.mebmarket.com/meb/server1/398683/Thumbnail/book_detail_large.gif?2",
+    "sinopsis": "Yo, Eirin, estaba escuchando a escondidas a mis dos jefas, la señorita Nicha y la señorita Cher Em, mientras discutían sobre las infidelidades.\n\nLa discusión se caldeó tanto que tuve que intervenir, pero, en el calor del momento, la señorita Nicha nos empujó a las dos a la carretera.\n\nEntonces ocurrió algo inesperado.\n\nUn coche que circulaba a toda velocidad nos golpeó con tanta fuerza que ambas salimos disparadas por los aires. Cuando recuperé la conciencia, ya estaba en el cuerpo de la señorita Cher Em.\n\nEstar en el cuerpo de otra persona ya era bastante malo.\n\nTodo, mi familia y mi vida cotidiana, había cambiado por completo.\n\nTenía que encontrar la manera de volver a mi propio cuerpo a toda costa... ¡aunque tuviera que golpearme la cabeza contra el suelo para conseguirlo!",
+    "escogida": false,
+    "escogidaPor": "",
+    "serie": false,
+    "saga": "",
+    "sagaNumero": null,
+    "nueva": true
+  },
+  {
     "id": "clock",
     "titulo": "Clock",
     "autora": "ChaoPlanoy",
