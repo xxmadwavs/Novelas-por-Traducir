@@ -16,6 +16,21 @@
 
 const LIBROS = [
   {
+    "id": "the-editor-s-midlife-love",
+    "titulo": "The Editor’s Midlife Love",
+    "autora": "3dokjix",
+    "anio": 2026,
+    "paginas": 464,
+    "portada": "https://m.media-amazon.com/images/I/816s7UsLW6L._SL1500_.jpg",
+    "sinopsis": "A sus cuarenta años, Kulnida, conocida como la profesora Pla, ha dedicado su vida a mantener a su familia y a criar a su hija pequeña. Cuando las dificultades económicas la llevan a aceptar un trabajo inesperado como editora de Phakthima —o Por—, una autora de éxito que vive recluida, nunca imagina que una sola decisión cambiará su vida para siempre.\nPara Phakthima, que hace tiempo que perdió la pasión por escribir, conocer a Kulnida reaviva no solo su creatividad, sino también un corazón que creía que nunca volvería a amar.\nA medida que las dos mujeres se van acercando, ¿podrán superar las sombras del pasado y descubrir que nunca es demasiado tarde para una segunda oportunidad en el amor?",
+    "escogida": false,
+    "escogidaPor": "",
+    "serie": false,
+    "saga": "",
+    "sagaNumero": null,
+    "nueva": true
+  },
+  {
     "id": "if",
     "titulo": "If",
     "autora": "ChaoPlanoy",
