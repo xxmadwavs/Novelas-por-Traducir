@@ -660,9 +660,11 @@ function coincideBusqueda(libro, texto){
   return libro.titulo.toLowerCase().includes(t) || libro.autora.toLowerCase().includes(t);
 }
 
-/* Combina lo que dice books-data.js con el progreso vivo de Supabase.
-   Si una novela tiene fila en Supabase, esa fila manda sobre el "escogida"
-   del JSON. Si no tiene fila, se queda como estaba en el JSON (libre). */
+/* Supabase es la única fuente de verdad para "quién la traduce".
+   Si la novela tiene fila en novelas_traducir, esa fila manda.
+   Si no tiene fila, está libre — sin importar lo que diga el campo
+   "escogida" de books-data.js (ese campo ya no se usa para mostrar
+   estado en vivo, solo queda como dato histórico del catálogo). */
 function estadoDe(libro){
   const p = progresoPorLibro[libro.id];
   if(p){
@@ -676,9 +678,9 @@ function estadoDe(libro){
     };
   }
   return {
-    escogida: !!libro.escogida,
-    escogidaPor: libro.escogidaPor || '',
-    estado: libro.escogida ? 'traduciendo' : 'libre',
+    escogida: false,
+    escogidaPor: '',
+    estado: 'libre',
     progreso_porcentaje: null,
     capitulo_actual: null,
     capitulos_total: null
@@ -1017,7 +1019,8 @@ async function renderPanelProgreso(){
   const { data, error } = await supa
     .from('novelas_traducir')
     .select('*')
-    .eq('escogida_por_email', miEmail);
+    .eq('escogida_por_email', miEmail)
+    .eq('archivada', false);
 
   if(error || !data || data.length === 0){
     panelProgreso.style.display = 'none';
@@ -1056,6 +1059,7 @@ async function renderPanelProgreso(){
       <div class="acciones-progreso" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
         <button class="boton-principal" data-libro="${fila.libro_id}" onclick="guardarProgreso('${fila.libro_id}')">Guardar progreso</button>
         <button class="boton-secundario" data-libro="${fila.libro_id}" onclick="dejarLibroLibre('${fila.libro_id}')">Dejar esta novela libre</button>
+        <button class="boton-secundario" id="botonArchivar-${fila.libro_id}" data-libro="${fila.libro_id}" onclick="archivarNovela('${fila.libro_id}')" style="display:none;border-color:var(--sello-azul);color:var(--sello-azul)">Archivar novela terminada</button>
       </div>
       <div class="auth-ok" id="guardadoOk-${fila.libro_id}"></div>
     </div>
@@ -1079,8 +1083,34 @@ function actualizarPorcentajeCalculado(libroId){
   const capTotal = capTotalStr === '' ? null : Number(capTotalStr);
   const pct = calcularPorcentaje(capActual, capTotal);
   const el = document.getElementById('porcentajeCalculado-' + libroId);
-  if(!el) return;
-  el.textContent = pct === null ? '' : `${pct}% calculado a partir de los capítulos`;
+  if(el) el.textContent = pct === null ? '' : `${pct}% calculado a partir de los capítulos`;
+
+  // El botón de archivar solo aparece cuando el progreso llega al 100%.
+  const botonArchivar = document.getElementById('botonArchivar-' + libroId);
+  if(botonArchivar) botonArchivar.style.display = (pct === 100) ? 'inline-block' : 'none';
+}
+
+// Marca la novela como terminada y la archiva: deja de aparecer en el
+// panel "Tu progreso" de la traductora, pero sigue en el catálogo con
+// la etiqueta "Terminada".
+async function archivarNovela(libroId){
+  if(!sesionActual) return;
+  const libro = LIBROS.find(l => l.id === libroId);
+  const titulo = libro ? libro.titulo : libroId;
+  if(!confirm(`¿Archivar «${titulo}» como novela terminada? Dejará de aparecer en tu panel de progreso.`)) return;
+
+  const { error } = await supa.from('novelas_traducir').update({
+    estado: 'terminada',
+    archivada: true
+  }).eq('libro_id', libroId).eq('escogida_por_email', sesionActual.user.email);
+
+  if(error){
+    alert('No se pudo archivar la novela: ' + error.message);
+    return;
+  }
+  await cargarProgreso();
+  render();
+  await renderPanelProgreso();
 }
 
 async function guardarProgreso(libroId){
