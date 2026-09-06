@@ -152,6 +152,10 @@ h1{
   cursor:pointer;
 }
 .selector-paginas select:hover{background:rgba(169,132,63,0.1)}
+.selector-paginas select option{
+  background:var(--kraft);
+  color:var(--tinta);
+}
 .contador{
   text-align:center;
   font-family:var(--font-stamp);
@@ -629,10 +633,10 @@ h1{
   <div class="selector-paginas">
     <select id="filtroPaginas">
       <option value="todos">Todas las duraciones</option>
-      <option value="cortas">Cortas (&lt;125 pág.)</option>
-      <option value="medias">Medias (126–325 pág.)</option>
-      <option value="largas">Largas (326–625 pág.)</option>
-      <option value="super">Súper largas (&gt;625 pág.)</option>
+      <option value="cortas">Cortas (hasta 200 pág.)</option>
+      <option value="medias">Medias (200–400 pág.)</option>
+      <option value="largas">Largas (400–650 pág.)</option>
+      <option value="super">Súper largas (&gt;650 pág.)</option>
     </select>
   </div>
 </div>
@@ -672,12 +676,12 @@ let filtroActivo = 'todos';
 let textoBusqueda = '';
 let filtroPaginas = 'todos';
 
-// Cortas <125, Medias 126–325, Largas 326–625, Súper largas >625.
+// Cortas hasta 200, Medias 200–400, Largas 400–650, Súper largas >650.
 function rangoDePaginas(paginas){
   const p = Number(paginas) || 0;
-  if(p <= 125) return 'cortas';
-  if(p <= 325) return 'medias';
-  if(p <= 625) return 'largas';
+  if(p <= 200) return 'cortas';
+  if(p <= 400) return 'medias';
+  if(p <= 650) return 'largas';
   return 'super';
 }
 
