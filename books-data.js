@@ -541,21 +541,6 @@ const LIBROS = [
     "nueva": false
   },
   {
-    "id": "sweet-as-a-breeze-deadly-as-love",
-    "titulo": "Sweet as a Breeze, Deadly as Love",
-    "autora": "Lambo",
-    "anio": 2026,
-    "paginas": 193,
-    "portada": "https://cdn-local.mebmarket.com/meb/server1/448459/Thumbnail/book_detail_large.gif?5",
-    "sinopsis": "Todo comienza con una protesta por los precios de la caña de azúcar.\n\nDespués de que su hermana mayor, Hi-So Si, anteponga el amor a las expectativas y se case con una mujer, todas las esperanzas de continuar el linaje familiar recaen sobre Hi-So Song, la heredera que debe asumir tanto el legado como la responsabilidad.\n\nPor otro lado está Dao Nuea, que lidera la protesta contra la fábrica de la señorita Song, convencida de que lucha por lo que es justo. Pero cuando se adentra en el mundo al que antes se oponía, la certeza empieza a desvanecerse, al igual que la distancia entre ellas.\n\nLo que comienza como un conflicto se convierte poco a poco en algo de lo que ninguna de las dos puede alejarse, aunque todas las expectativas les digan que deberían hacerlo.",
-    "escogida": true,
-    "escogidaPor": "",
-    "serie": false,
-    "saga": "",
-    "sagaNumero": null,
-    "nueva": false
-  },
-  {
     "id": "formidable-eyes-khom-khlang",
     "titulo": "FORMIDABLE EYES (Khom Khlang)",
     "autora": "Luxurious.W",
