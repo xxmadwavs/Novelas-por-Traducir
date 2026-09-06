@@ -139,6 +139,19 @@ h1{
   color:var(--verde);
   border-color:var(--latón);
 }
+.selector-paginas select{
+  background:var(--verde2);
+  border:1px solid rgba(169,132,63,0.35);
+  color:var(--kraft);
+  font-family:var(--font-stamp);
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:10px 12px;
+  border-radius:2px;
+  cursor:pointer;
+}
+.selector-paginas select:hover{background:rgba(169,132,63,0.1)}
 .contador{
   text-align:center;
   font-family:var(--font-stamp);
@@ -613,6 +626,15 @@ h1{
     <button class="tab" data-filtro="libre">Libres</button>
     <button class="tab" data-filtro="escogida">Escogidas</button>
   </div>
+  <div class="selector-paginas">
+    <select id="filtroPaginas">
+      <option value="todos">Todas las duraciones</option>
+      <option value="cortas">Cortas (&lt;125 pág.)</option>
+      <option value="medias">Medias (126–325 pág.)</option>
+      <option value="largas">Largas (326–625 pág.)</option>
+      <option value="super">Súper largas (&gt;625 pág.)</option>
+    </select>
+  </div>
 </div>
 <p class="contador" id="contador"></p>
 
@@ -648,6 +670,16 @@ const ESTADOS = {
 
 let filtroActivo = 'todos';
 let textoBusqueda = '';
+let filtroPaginas = 'todos';
+
+// Cortas <125, Medias 126–325, Largas 326–625, Súper largas >625.
+function rangoDePaginas(paginas){
+  const p = Number(paginas) || 0;
+  if(p <= 125) return 'cortas';
+  if(p <= 325) return 'medias';
+  if(p <= 625) return 'largas';
+  return 'super';
+}
 
 const rejilla = document.getElementById('rejilla');
 const contador = document.getElementById('contador');
@@ -711,6 +743,7 @@ function render(){
     const info = estadoDe(libro);
     if(filtroActivo === 'libre' && info.escogida) return false;
     if(filtroActivo === 'escogida' && !info.escogida) return false;
+    if(filtroPaginas !== 'todos' && rangoDePaginas(libro.paginas) !== filtroPaginas) return false;
     return coincideBusqueda(libro, textoBusqueda);
   });
 
@@ -809,6 +842,11 @@ document.querySelectorAll('.tab').forEach(btn=>{
 
 document.getElementById('buscar').addEventListener('input', e=>{
   textoBusqueda = e.target.value;
+  render();
+});
+
+document.getElementById('filtroPaginas').addEventListener('change', e=>{
+  filtroPaginas = e.target.value;
   render();
 });
 

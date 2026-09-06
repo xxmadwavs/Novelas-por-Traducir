@@ -16,6 +16,36 @@
 
 const LIBROS = [
   {
+    "id": "the-girl-from-my-dreams",
+    "titulo": "The girl from my dreams",
+    "autora": "Kasika Kattiya",
+    "anio": 2026,
+    "paginas": 93,
+    "portada": "https://cdn-local.mebmarket.com/meb/server1/438893/Thumbnail/book_detail_large.gif?2",
+    "sinopsis": "La historia narra las aventuras de una chica llamada Fon que se ve inmersa en una realidad alternativa. No entiende lo que está pasando y, justo cuando cree que se está volviendo loca, aparecen los Guardianes. Entre ellos hay una chica peculiar llamada Jun. Más tarde se descubre que es la Guardiana de la Luna y la protectora de los sueños. Cuanto más tiempo pasan juntas, más fuerte se vuelve su inexplicable conexión.",
+    "escogida": false,
+    "escogidaPor": "",
+    "serie": false,
+    "saga": "",
+    "sagaNumero": null,
+    "nueva": true
+  },
+  {
+    "id": "mae-liang-netsa",
+    "titulo": "Mae Liang Netsa",
+    "autora": "Sunniva",
+    "anio": 2026,
+    "paginas": 37,
+    "portada": "https://cdn-local.mebmarket.com/meb/server1/465513/Thumbnail/book_detail_large.gif?2",
+    "sinopsis": "La soledad la llevó a buscar a alguien con quien pasar el rato.\nPero este chico de cara de ángel no era tan inocente como ella pensaba.\nCuando ella se lo propuso...\n¡Ella no dudó en acceder!\nCon un amor ardiente y dulce.\nLo que empezó como un juego para pasar el rato...\nacabó convirtiéndose en una derrota para ella ante su malicia.",
+    "escogida": false,
+    "escogidaPor": "",
+    "serie": false,
+    "saga": "",
+    "sagaNumero": null,
+    "nueva": true
+  },
+  {
     "id": "juliet-juliet",
     "titulo": "juliet & juliet",
     "autora": "Freaky",
@@ -25,7 +55,7 @@ const LIBROS = [
     "sinopsis": "El sueño de Blue es estudiar en la Facultad de Bellas Artes\nde la universidad de arte más prestigiosa de Tailandia y convertirse en una artista famosa en todo el mundo.\n\nEsto hace que su camino se cruce con el de la hija de una persona influyente de la provincia, como es el caso de\nTokio, una joven que se adentra en un mundo de cuentos de hadas lleno de felicidad para escapar de la violencia de la vida real.\n\nEl amor secreto da sus frutos, maduro y dulce como una fruta prohibida.\nLas dos pajaritas crecieron poco a poco, con la intención de escapar de la jaula dorada que los adultos les habían construido con tanto esmero.\n\nSi el precio de todo aquello fuera la muerte,\nsolo la luna y Dios sabrían si, cuando las hijas de dos familias enemistadas se enamoraran,\nel destino de las dos Julietas acabaría siendo igual al de Romeo y Julieta, a quienes ellas mismas se habían burlado.",
     "escogida": false,
     "escogidaPor": "",
-    "serie": false,
+    "serie": true,
     "saga": "",
     "sagaNumero": null,
     "nueva": true
