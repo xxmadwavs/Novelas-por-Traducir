@@ -46,21 +46,6 @@ const LIBROS = [
     "nueva": true
   },
   {
-    "id": "juliet-juliet",
-    "titulo": "juliet & juliet",
-    "autora": "Freaky",
-    "anio": 2026,
-    "paginas": 353,
-    "portada": "https://cdn-local.mebmarket.com/meb/server1/465876/Thumbnail/book_detail_large.gif?2",
-    "sinopsis": "El sueño de Blue es estudiar en la Facultad de Bellas Artes\nde la universidad de arte más prestigiosa de Tailandia y convertirse en una artista famosa en todo el mundo.\n\nEsto hace que su camino se cruce con el de la hija de una persona influyente de la provincia, como es el caso de\nTokio, una joven que se adentra en un mundo de cuentos de hadas lleno de felicidad para escapar de la violencia de la vida real.\n\nEl amor secreto da sus frutos, maduro y dulce como una fruta prohibida.\nLas dos pajaritas crecieron poco a poco, con la intención de escapar de la jaula dorada que los adultos les habían construido con tanto esmero.\n\nSi el precio de todo aquello fuera la muerte,\nsolo la luna y Dios sabrían si, cuando las hijas de dos familias enemistadas se enamoraran,\nel destino de las dos Julietas acabaría siendo igual al de Romeo y Julieta, a quienes ellas mismas se habían burlado.",
-    "escogida": false,
-    "escogidaPor": "",
-    "serie": true,
-    "saga": "",
-    "sagaNumero": null,
-    "nueva": true
-  },
-  {
     "id": "the-editor-s-midlife-love",
     "titulo": "The Editor’s Midlife Love",
     "autora": "3dokjix",
@@ -151,21 +136,6 @@ const LIBROS = [
     "nueva": false
   },
   {
-    "id": "be-my-boo",
-    "titulo": "Be my Boo!",
-    "autora": "Khun Phuying",
-    "anio": 2023,
-    "paginas": 395,
-    "portada": "https://cdn-local.mebmarket.com/meb/server1/256122/Thumbnail/book_detail_large.gif?2",
-    "sinopsis": "Alguien dijo una vez: «Un ex es para olvidarlo, no para amarlo». Pero, en el caso de cierto ex, el corazón simplemente no puede olvidarlo. Es más, sigue aferrándose a ese amor. ¿Qué debo hacer?\n\nJaokha no quiere tener «un exnovio favorito», mientras que Papie desea con todas sus fuerzas volver y ser «el nuevo novio».\n.\n.\n«¿Puedes alejarte?»\n«¿Cuánto?»\n«Más lejos que esto».\n«Pero estoy intentando reconciliarme contigo. Si estoy más lejos, ¿cómo voy a hacerlo?»",
-    "escogida": false,
-    "escogidaPor": "",
-    "serie": false,
-    "saga": "BE MINE",
-    "sagaNumero": 4,
-    "nueva": false
-  },
-  {
     "id": "because-of-love-vol-1",
     "titulo": "Because of Love vol 1",
     "autora": "MeeNam",
@@ -208,21 +178,6 @@ const LIBROS = [
     "serie": false,
     "saga": "TSOU",
     "sagaNumero": 6,
-    "nueva": false
-  },
-  {
-    "id": "reverse-4-you",
-    "titulo": "Reverse 4 You",
-    "autora": "Zezeho",
-    "anio": 2024,
-    "paginas": 1166,
-    "portada": "https://cdn-local.mebmarket.com/meb/server1/268542/Thumbnail/book_detail_large.gif?2",
-    "sinopsis": "Revertí el tiempo diez minutos, todo para sumergirme en el amor más profundo.\n\nEn un mundo donde el tiempo se dobla a voluntad de una chica común y corriente 'Jattawa' posee la extraordinaria habilidad de manipular el tiempo. ¿Su ambición? Convertirse en abogada y ejercer sus poderes por dinero. Pero el destino da un giro inesperado cuando se cruza con 'Four', una misteriosa estudiante de último año que está destinada a ser su alma gemela, según las predicciones de las visiones de su hermana.\nA medida que sus destinos se entrelazan, Jattawa se ve acosada por una sensación recurrente de déjà vu, un sentimiento de que ella y Four se han conocido a lo largo de incontables vidas. Sin embargo, su conexión desafía los límites del tiempo, lo que plantea preguntas sobre la naturaleza de su vínculo.\n\n¿Qué secretos se esconden detrás de su conexión atemporal? ¿Pueden los poderes únicos de Jattawa alterar el curso del destino? Con el poder de reescribir el pasado y salvar a quienes ama, Jattawa se embarcará en una carrera contra el tiempo y el destino mismo. ¡Sumérgete en esta cautivadora historia y descubre el enigma de un amor que trasciende incluso el tiempo!",
-    "escogida": true,
-    "escogidaPor": "",
-    "serie": true,
-    "saga": "REVERSE 4 YOU",
-    "sagaNumero": 1,
     "nueva": false
   },
   {
