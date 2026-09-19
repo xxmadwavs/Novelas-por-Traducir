@@ -16,6 +16,36 @@
 
 const LIBROS = [
   {
+    "id": "beside-the-dragon",
+    "titulo": "Beside the Dragon",
+    "autora": "Salmon",
+    "anio": 2025,
+    "paginas": 325,
+    "portada": "https://cdn-local.mebmarket.com/meb/server1/347169/Thumbnail/book_detail_large.gif?21",
+    "sinopsis": "Cuando Fa Anant, la protagonista que no le da importancia a los medios y a la que apodan «la reina de los escándalos»,\nse encuentra con Nungthara, la hija menor del magnate Charoen Kiat,\ny surge la ocasión de que la actriz de Viena pase a formar parte de «Darakorn».\n¿Esta colaboración, basada en un plan para simular una relación de pareja, les llevará al éxito,\no les acarreará problemas por todas partes que pondrán a prueba su relación?",
+    "escogida": false,
+    "escogidaPor": "",
+    "serie": false,
+    "saga": "",
+    "sagaNumero": null,
+    "nueva": true
+  },
+  {
+    "id": "lost-in-you-no-lo-encuentro-en-meb",
+    "titulo": "Lost in you (no lo encuentro en meb)",
+    "autora": "Siix",
+    "anio": null,
+    "paginas": 145,
+    "portada": "",
+    "sinopsis": "Ice viaja a Sídney, Australia, con la intención de comenzar una nueva etapa de su vida. Allí conoce a Cee, una chica que despierta rápidamente su curiosidad y una atracción que ninguna de las dos parece saber cómo manejar. Entre encuentros inesperados, amistades, celos, malentendidos y sentimientos cada vez más difíciles de ignorar, la relación entre ambas comienza a complicarse.\n\nLo que inicialmente parece una atracción pasajera acaba convirtiéndose en algo mucho más profundo. Sin embargo, los secretos, los recuerdos del pasado y las decisiones que ambas toman pondrán a prueba lo que sienten. Ice tendrá que enfrentarse a sus propios sentimientos y descubrir qué es realmente lo que quiere antes de perder a la persona que ha conseguido ocupar un lugar inesperado en su vida.",
+    "escogida": false,
+    "escogidaPor": "",
+    "serie": false,
+    "saga": "",
+    "sagaNumero": null,
+    "nueva": true
+  },
+  {
     "id": "the-girl-from-my-dreams",
     "titulo": "The girl from my dreams",
     "autora": "Kasika Kattiya",
@@ -73,7 +103,7 @@ const LIBROS = [
     "serie": false,
     "saga": "",
     "sagaNumero": null,
-    "nueva": true
+    "nueva": false
   },
   {
     "id": "clock",
@@ -88,21 +118,6 @@ const LIBROS = [
     "serie": false,
     "saga": "",
     "sagaNumero": null,
-    "nueva": true
-  },
-  {
-    "id": "ferris-wheel",
-    "titulo": "Ferris Wheel",
-    "autora": "reallyb",
-    "anio": 2025,
-    "paginas": 474,
-    "portada": "https://cdn-local.mebmarket.com/meb/server1/401749/Thumbnail/book_detail_large.gif?3",
-    "sinopsis": "Ayudar a una chica de instituto que resultó herida en un pequeño accidente en la acera a principios de diciembre también marca el comienzo de un nuevo capítulo en la vida de Air. La chica dice con toda seriedad que su madre le enseñó que, cuando alguien te trata con amabilidad, debes corresponderle.\n\n«¿Podrías dejar que mi madre te invite a comer como agradecimiento?»\n\nSi Air no hubiera aceptado la invitación, ahora mismo no habría podido encontrar un nuevo hogar, y su celebración de fin de año habría sido igual que en los últimos años.\n\nHan pasado tres años desde que la persona que la amaba estuvo a su lado. Han sido tres años en los que el mes de diciembre ha inundado su corazón de soledad. En medio de la alegre celebración, la sensación de aislamiento que experimentaba como consecuencia de la soledad la hizo derramar lágrimas. Sin embargo, este diciembre, la vida de la mujer que aún no consigue superar la ruptura con su exnovio está experimentando cambios significativos. Y el cambio más notable es...\n\n… esta Navidad, no tiene que celebrarla sola, pensando en Pure, como ha venido haciendo hasta ahora.\n\n«Sería un placer que te unieras a nosotros para celebrar la Navidad, si aún no tienes otros planes».\n\nEste año, Air tendrá a alguien con quien celebrar la Navidad.",
-    "escogida": true,
-    "escogidaPor": "Ana Villa",
-    "serie": false,
-    "saga": "Roller Coaster",
-    "sagaNumero": 2,
     "nueva": false
   },
   {
@@ -491,21 +506,6 @@ const LIBROS = [
     "escogida": false,
     "escogidaPor": "",
     "serie": false,
-    "saga": "",
-    "sagaNumero": null,
-    "nueva": false
-  },
-  {
-    "id": "formidable-eyes-khom-khlang",
-    "titulo": "FORMIDABLE EYES (Khom Khlang)",
-    "autora": "Luxurious.W",
-    "anio": 2025,
-    "paginas": 715,
-    "portada": "https://cdn-local.mebmarket.com/meb/server1/364040/Thumbnail/book_detail_large.gif?2",
-    "sinopsis": "En esta novela, conocerás a Mae Kru Bulan , una mujer con características únicas y una belleza cautivadora que te hará sentir encantado, al igual que a la teniente Peem, quien nunca había creído en la magia. Una vez que la veneras como tu maestra, nunca olvidarás su nombre por el resto de tu vida.\nEspero sinceramente que este trabajo traiga felicidad a quienes lo lean, ya que he elaborado esta novela con la máxima dedicación. Prometo seguir mejorando en el futuro como una forma de agradecer a todos mis lectores. Me disculpo sinceramente si hay alguna deficiencia o error.",
-    "escogida": false,
-    "escogidaPor": "",
-    "serie": true,
     "saga": "",
     "sagaNumero": null,
     "nueva": false
